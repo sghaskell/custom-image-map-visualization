@@ -37,7 +37,7 @@ define([
             'display.visualizations.custom.retail_map_viz.map_viz.showPath': 1
         },
         peeps: {},
-        peep: function(description, currentPos, lastSeen, maxAge, iconColor, markerColor, icon, extraClasses) {
+        peep: function(description, currentPos, lastSeen, maxAge, iconColor, markerColor, icon, prefix, extraClasses) {
             if(iconColor) {
                 this.iconColor = iconColor;
             } else {
