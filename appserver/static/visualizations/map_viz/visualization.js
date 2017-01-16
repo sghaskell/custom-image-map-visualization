@@ -82,7 +82,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	            'display.visualizations.custom.retail_map_viz.map_viz.showPath': 1
 	        },
 	        peeps: {},
-	        peep: function(description, currentPos, lastSeen, maxAge, iconColor) {
+	        peep: function(description, currentPos, lastSeen, maxAge, iconColor, markerColor, icon, extraClasses) {
 	            if(iconColor) {
 	                this.iconColor = iconColor;
 	            } else {
@@ -92,10 +92,10 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	            this.currentPos = currentPos; 
 	            this.coordinates = [];
 	            this.coordinates.push(currentPos);
-	            this.markerIcon = L.AwesomeMarkers.icon({prefix: 'fa',
-	                                                     markerColor: 'cadetblue',
-	                                                     icon: 'user',
-	                                                     extraClasses: 'fa-lg',
+	            this.markerIcon = L.AwesomeMarkers.icon({prefix: prefix,
+	                                                     markerColor: markerColor,
+	                                                     icon: icon,
+	                                                     extraClasses: extraClasses,
 	                                                     iconColor: this.iconColor});
 	            this.layerGroup= L.layerGroup();
 	            this.lastSeen = lastSeen;
@@ -222,39 +222,6 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	            if(_.isEmpty(config)) {
 	                config = this.defaultConfig;
 	            }
-
-
-	            /*
-	            console.log(this.clearMap);
-
-	            // Clear map and reset everything
-	            if(this.clearMap === true) {
-	                console.log("CLEARING MAP!!");
-	                this.offset = 0; // reset offset
-	                this.updateDataParams({count: this.chunk, offset: this.offset}); // update data params
-	                this.invalidateUpdateView();  // redraw map
-	                //var markers = this.markers;
-	                //this.markers.clearLayers();
-	                var clearMap = this.clearMap;
-	                this.clearMap = false;
-	                var dt1 = new Date();
-	                _.each(this.peeps, function(p, i) {
-	                    p.layerGroup.clearLayers();
-	                    var dt2 = new Date(p.lastSeen);
-	                    //console.log(dt1, dt2);
-	                    var diff = Math.abs(dt1-dt2);
-	                    if(diff > 60000) {
-	                        console.log("Removing " + p.MAC);
-	                        delete this.peeps[i];
-	                    }
-	                }, this);
-	                // remove layers from map and clear out marker data
-	                //_.each(this.layerFilter, function(lg, i) {
-	                //    lg.group.clearLayers();
-	                //    lg.markerList = [];
-	                //}, this);
-	            }
-	            */
 
 	            // get data
 	            var dataRows = data.results;
@@ -401,6 +368,10 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	                var pathWeight = (_.has(userData, "pathWeight")) ? userData["pathWeight"]:5;
 	                var pathOpacity = (_.has(userData, "pathOpacity")) ? userData["pathOpacity"]:0.5;
 	                var iconColor = (_.has(userData, "iconColor")) ? userData["iconColor"]:null;
+	                var markerColor = (_.has(userData, "markerColor")) ? userData["markerColor"]:"blue";
+	                var icon = (_.has(userData, "icon")) ? userData["icon"]:"circle";
+	                var prefix = (_.has(userData, "prefix")) ? userData["prefix"]:"fa";
+	                var extraClasses = (_.has(userData, "extraClasses")) ? userData["extraClasses"]:"fa-lg";
 	                var title = (_.has(userData, "title")) ? userData["title"]:null;
 
 	                if(_.has(this.peeps, description)) {
@@ -409,7 +380,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	                    this.peeps[description].lastSeen= lastSeen;
 	                } else {
 	                    console.log("creating " + description);
-	                    var thisPeep = new this.peep(description, latlng, lastSeen, maxAge, iconColor);
+	                    var thisPeep = new this.peep(description, latlng, lastSeen, maxAge, iconColor, markerColor, icon, prefix, extraClasses);
 	                    thisPeep.pathWeight = pathWeight;
 	                    thisPeep.pathOpacity = pathOpacity;
 	                    thisPeep.title = title;

@@ -37,7 +37,7 @@ define([
             'display.visualizations.custom.retail_map_viz.map_viz.showPath': 1
         },
         peeps: {},
-        peep: function(description, currentPos, lastSeen, maxAge, iconColor) {
+        peep: function(description, currentPos, lastSeen, maxAge, iconColor, markerColor, icon, extraClasses) {
             if(iconColor) {
                 this.iconColor = iconColor;
             } else {
@@ -47,10 +47,10 @@ define([
             this.currentPos = currentPos; 
             this.coordinates = [];
             this.coordinates.push(currentPos);
-            this.markerIcon = L.AwesomeMarkers.icon({prefix: 'fa',
-                                                     markerColor: 'cadetblue',
-                                                     icon: 'user',
-                                                     extraClasses: 'fa-lg',
+            this.markerIcon = L.AwesomeMarkers.icon({prefix: prefix,
+                                                     markerColor: markerColor,
+                                                     icon: icon,
+                                                     extraClasses: extraClasses,
                                                      iconColor: this.iconColor});
             this.layerGroup= L.layerGroup();
             this.lastSeen = lastSeen;
@@ -323,6 +323,10 @@ define([
                 var pathWeight = (_.has(userData, "pathWeight")) ? userData["pathWeight"]:5;
                 var pathOpacity = (_.has(userData, "pathOpacity")) ? userData["pathOpacity"]:0.5;
                 var iconColor = (_.has(userData, "iconColor")) ? userData["iconColor"]:null;
+                var markerColor = (_.has(userData, "markerColor")) ? userData["markerColor"]:"blue";
+                var icon = (_.has(userData, "icon")) ? userData["icon"]:"circle";
+                var prefix = (_.has(userData, "prefix")) ? userData["prefix"]:"fa";
+                var extraClasses = (_.has(userData, "extraClasses")) ? userData["extraClasses"]:"fa-lg";
                 var title = (_.has(userData, "title")) ? userData["title"]:null;
 
                 if(_.has(this.peeps, description)) {
@@ -331,7 +335,7 @@ define([
                     this.peeps[description].lastSeen= lastSeen;
                 } else {
                     console.log("creating " + description);
-                    var thisPeep = new this.peep(description, latlng, lastSeen, maxAge, iconColor);
+                    var thisPeep = new this.peep(description, latlng, lastSeen, maxAge, iconColor, markerColor, icon, prefix, extraClasses);
                     thisPeep.pathWeight = pathWeight;
                     thisPeep.pathOpacity = pathOpacity;
                     thisPeep.title = title;
