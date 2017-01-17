@@ -72,6 +72,14 @@ define([
             };
         },
 
+		// Used to check mapHeight and mapWidth and throw an error if the values are missing
+		checkNan: function(val, field) {
+			var error = 'Missing ' + field + ' - Please set in format menu';
+			if(isNaN(val)) {
+				 throw new SplunkVisualizationBase.VisualizationError(error);
+			}
+		},
+
         initialize: function() {
             SplunkVisualizationBase.prototype.initialize.apply(this, arguments);
             this.$el = $(this.el);
@@ -211,6 +219,9 @@ define([
                 maxZoom     = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.maxZoom']),
                 kmlOverlay  = config['display.visualizations.custom.retail-map-viz.map_viz.kmlOverlay'],
                 showPath = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.showPath'])
+
+            this.checkNan(mapHeight, "Map Height");
+            this.checkNan(mapWidth, "Map Width");
 
             // Initialize the DOM
             if (!this.isInitializedDom) {
