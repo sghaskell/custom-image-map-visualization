@@ -37,21 +37,37 @@ define([
             'display.visualizations.custom.retail-map-viz.map_viz.showPath': 1
         },
         peeps: {},
-        peep: function(description, currentPos, lastSeen, maxAge, iconColor, markerColor, icon, prefix, extraClasses) {
+		// Peep object used to represent a user on the map
+        peep: function(description,
+					   currentPos,
+					   lastSeen,
+					   maxAge,
+					   iconColor,
+					   markerColor,
+					   icon,
+					   prefix,
+				       extraClasses) {
+
             if(iconColor) {
                 this.iconColor = iconColor;
             } else {
+				// Randomly generate Hex color if iconColor is not present
                 this.iconColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
             }
+
+			// Assign values
             this.description = description;
             this.currentPos = currentPos; 
             this.coordinates = [];
             this.coordinates.push(currentPos);
+
+			// Create marker icon
             this.markerIcon = L.AwesomeMarkers.icon({prefix: prefix,
                                                      markerColor: markerColor,
                                                      icon: icon,
                                                      extraClasses: extraClasses,
                                                      iconColor: this.iconColor});
+			// Init layerGroup for this peep
             this.layerGroup= L.layerGroup();
             this.lastSeen = lastSeen;
             this.marker = null;
@@ -59,6 +75,7 @@ define([
             this.drilldownFields = null;
             this.maxAge = maxAge;
 
+			// Used to determine whether to remove peep from map
             this.isAgedOut = function() {
                 var dt1 = new Date();
                 var dt2 = new Date(this.lastSeen);
@@ -272,7 +289,8 @@ define([
                 // dimensions of the image
                 var w = mapWidth;
                 var h = mapHeight;
-
+				
+				// Set bounds and create image overlay
                 var bounds = [[0,w], [h,0]];
                 var overlay = L.imageOverlay(activeImage, bounds);
 
@@ -280,9 +298,8 @@ define([
                 map.setMaxBounds(bounds); 
                 map.fitBounds(bounds); 
 
+				// Add overlay to map
                 this.map.addLayer(overlay);
-                //console.log(this.map._layers);
-
 
                 // Get parent element of div to resize
                 var parentEl = $(this.el).parent().parent().closest("div").attr("data-cid");
@@ -319,7 +336,6 @@ define([
                 this.chunk = 50000;
                 this.offset = 0;
                 this.isInitializedDom = true;         
-                this.clearMap = false;
             } 
 
             // BEGIN PROCESSING DATA
@@ -340,13 +356,23 @@ define([
                 var extraClasses = (_.has(userData, "extraClasses")) ? userData["extraClasses"]:"fa-lg";
                 var title = (_.has(userData, "title")) ? userData["title"]:null;
 
+				// Peep exists. Update with latest values
                 if(_.has(this.peeps, description)) {
                     this.peeps[description].currentPos = latlng;
                     this.peeps[description].coordinates.push(latlng);
                     this.peeps[description].lastSeen= lastSeen;
                 } else {
+					// Create a new peep
                     console.log("creating " + description);
-                    var thisPeep = new this.peep(description, latlng, lastSeen, maxAge, iconColor, markerColor, icon, prefix, extraClasses);
+                    var thisPeep = new this.peep(description,
+											     latlng,
+												 lastSeen,
+												 maxAge,
+												 iconColor,
+												 markerColor,
+											 	 icon,
+												 prefix,
+												 extraClasses);
                     thisPeep.pathWeight = pathWeight;
                     thisPeep.pathOpacity = pathOpacity;
                     thisPeep.title = title;
@@ -367,9 +393,11 @@ define([
                     delete this.peeps[i];
                 }
 
+				// marker exists, update with latest position
                 if(peep.marker) {
                     peep.marker.setLatLng(peep.currentPos);
                 } else {
+					// Add peeps marker to its layer group and stick on the map
                     peep.layerGroup.addTo(this.map);
                     if(this.isArgTrue(allPopups)) {
                         peep.marker = L.marker(peep.currentPos, {icon: peep.markerIcon, title: peep.title}).bindPopup(peep.description).addTo(peep.layerGroup).openPopup();
@@ -383,8 +411,10 @@ define([
                 }
                 if(this.isArgTrue(showPath)) {
                     if(peep.path) {
+						// update the path coordinates
                         peep.path.setLatLngs(peep.coordinates);
                     } else {
+						// Add path to peeps layerGroup and draw on the map
                         peep.path = L.polyline(peep.coordinates, {weight: peep.pathWeight,
                                                                   opacity: peep.pathOpacity,
                                                                   color: peep.iconColor}).addTo(peep.layerGroup);
@@ -400,7 +430,6 @@ define([
             } else {
                 this.offset = 0; // reset offset
                 this.updateDataParams({count: this.chunk, offset: this.offset}); // update data params
-                this.clearMap = true;
             }
 
             return this;
