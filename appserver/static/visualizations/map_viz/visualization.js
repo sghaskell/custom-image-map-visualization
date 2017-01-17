@@ -66,20 +66,20 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	        ) {
 
 	    return SplunkVisualizationBase.extend({
-	        contribUri: '/en-US/static/app/retail_map_viz/visualizations/map_viz/contrib/',
+	        contribUri: '/en-US/static/app/retail-map-viz/visualizations/map_viz/contrib/',
 	        defaultConfig:  {
-	            'display.visualizations.custom.retail_map_viz.map_viz.allPopups': 0,
-	            'display.visualizations.custom.retail_map_viz.map_viz.multiplePopups': 0,
-	            'display.visualizations.custom.retail_map_viz.map_viz.scrollWheelZoom': 0,
-	            'display.visualizations.custom.retail_map_viz.map_viz.fullScreen': 0,
-	            'display.visualizations.custom.retail_map_viz.map_viz.drilldown': 0,
-	            'display.visualizations.custom.retail_map_viz.map_viz.defaultHeight': 600,
-	            'display.visualizations.custom.retail_map_viz.map_viz.mapCenterZoom': 0,
-	            'display.visualizations.custom.retail_map_viz.map_viz.mapCenterX': 0,
-	            'display.visualizations.custom.retail_map_viz.map_viz.mapCenterY': 0,
-	            'display.visualizations.custom.retail_map_viz.map_viz.minZoom': 0,
-	            'display.visualizations.custom.retail_map_viz.map_viz.maxZoom': 0,
-	            'display.visualizations.custom.retail_map_viz.map_viz.showPath': 1
+	            'display.visualizations.custom.retail-map-viz.map_viz.allPopups': 0,
+	            'display.visualizations.custom.retail-map-viz.map_viz.multiplePopups': 0,
+	            'display.visualizations.custom.retail-map-viz.map_viz.scrollWheelZoom': 0,
+	            'display.visualizations.custom.retail-map-viz.map_viz.fullScreen': 0,
+	            'display.visualizations.custom.retail-map-viz.map_viz.drilldown': 0,
+	            'display.visualizations.custom.retail-map-viz.map_viz.defaultHeight': 600,
+	            'display.visualizations.custom.retail-map-viz.map_viz.mapCenterZoom': 0,
+	            'display.visualizations.custom.retail-map-viz.map_viz.mapCenterX': 0,
+	            'display.visualizations.custom.retail-map-viz.map_viz.mapCenterY': 0,
+	            'display.visualizations.custom.retail-map-viz.map_viz.minZoom': 0,
+	            'display.visualizations.custom.retail-map-viz.map_viz.maxZoom': 0,
+	            'display.visualizations.custom.retail-map-viz.map_viz.showPath': 1
 	        },
 	        peeps: {},
 	        peep: function(description, currentPos, lastSeen, maxAge, iconColor, markerColor, icon, prefix, extraClasses) {
@@ -240,22 +240,22 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	            }
 
 	            // get configs
-	            var mapImage = SplunkVisualizationUtils.makeSafeUrl(config['display.visualizations.custom.retail_map_viz.map_viz.mapImage']),
-	                mapHeight = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.mapHeight']),
-	                mapWidth = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.mapWidth']),
-	                allPopups   = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.allPopups']),
-	                multiplePopups = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.multiplePopups']),
-	                scrollWheelZoom = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.scrollWheelZoom']),
-	                fullScreen = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.fullScreen']),
-	                drilldown = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.drilldown']),
-	                defaultHeight = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.defaultHeight']),
-	                mapCenterZoom = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.mapCenterZoom']),
-	                mapCenterX = parseFloat(config['display.visualizations.custom.retail_map_viz.map_viz.mapCenterX']),
-	                mapCenterY = parseFloat(config['display.visualizations.custom.retail_map_viz.map_viz.mapCenterY']),
-	                minZoom     = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.minZoom']),
-	                maxZoom     = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.maxZoom']),
-	                kmlOverlay  = config['display.visualizations.custom.retail_map_viz.map_viz.kmlOverlay'],
-	                showPath = parseInt(config['display.visualizations.custom.retail_map_viz.map_viz.showPath'])
+	            var mapImage = SplunkVisualizationUtils.makeSafeUrl(config['display.visualizations.custom.retail-map-viz.map_viz.mapImage']),
+	                mapHeight = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.mapHeight']),
+	                mapWidth = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.mapWidth']),
+	                allPopups   = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.allPopups']),
+	                multiplePopups = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.multiplePopups']),
+	                scrollWheelZoom = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.scrollWheelZoom']),
+	                fullScreen = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.fullScreen']),
+	                drilldown = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.drilldown']),
+	                defaultHeight = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.defaultHeight']),
+	                mapCenterZoom = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.mapCenterZoom']),
+	                mapCenterX = parseFloat(config['display.visualizations.custom.retail-map-viz.map_viz.mapCenterX']),
+	                mapCenterY = parseFloat(config['display.visualizations.custom.retail-map-viz.map_viz.mapCenterY']),
+	                minZoom     = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.minZoom']),
+	                maxZoom     = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.maxZoom']),
+	                kmlOverlay  = config['display.visualizations.custom.retail-map-viz.map_viz.kmlOverlay'],
+	                showPath = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.showPath'])
 
 	            // Initialize the DOM
 	            if (!this.isInitializedDom) {
