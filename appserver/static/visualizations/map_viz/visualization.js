@@ -139,11 +139,15 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 				};
 
 				this.dimPath = function () {
-					this.path.setStyle({opacity: this.unfocusedOpacity});
+					if(this.path) {
+						this.path.setStyle({opacity: this.unfocusedOpacity});
+					}
 				};
 
 				this.unDimPath = function () {
-					this.path.setStyle({opacity: this.pathOpacity});
+					if(this.path) {
+						this.path.setStyle({opacity: this.pathOpacity});
+					}
 				};
 
 				// Used to determine whether to remove peep from map
