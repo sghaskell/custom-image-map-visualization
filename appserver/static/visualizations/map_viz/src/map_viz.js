@@ -491,9 +491,17 @@ define([
 						peep.path.setLatLngs(peep.coordinates);
 					} else {
 						// Add path to peeps layerGroup and draw on the map
-						peep.path = L.polyline(peep.coordinates, {weight: peep.pathWeight,
-																  opacity: peep.pathOpacity,
-																  color: peep.iconColor}).addTo(peep.layerGroup);
+						peep.path = L.polyline(peep.coordinates,
+												{weight: peep.pathWeight,
+												 opacity: peep.pathOpacity,
+												 color: peep.iconColor}
+											  )
+											  .addTo(peep.layerGroup)
+											  .bindPopup(peep.description, {closeOnClick: false});
+						if(this.isArgTrue(focusClicked)) {
+							peep.path.on('popupopen', this._dimMarkers.bind(this, peep));
+							peep.path.on('popupclose', this._unDimMarkers.bind(this, peep));
+						}
 					}
 				}
 
