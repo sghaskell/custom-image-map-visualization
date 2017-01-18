@@ -15,3 +15,5 @@ display.visualizations.custom.retail-map-viz.map_viz.minZoom = <int>
 display.visualizations.custom.retail-map-viz.map_viz.maxZoom = <int>
 display.visualizations.custom.retail-map-viz.map_viz.kmlOverlay = <string>
 display.visualizations.custom.retail-map-viz.map_viz.showPath = <string> 
+display.visualizations.custom.retail-map-viz.map_viz.focusClicked= <string>
+display.visualizations.custom.retail-map-viz.map_viz.unfocusedOpacity = <int> 
