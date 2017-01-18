@@ -126,6 +126,23 @@
             <span class="help-block ">Allow multiple popups to dispaly on screen without closing previous. Will disappear at higher zoom levels with clustering enabled. Enabled by default when showing all popups.</span> 
         </div>
     </div>
+    <div class="control-group">
+        <label class="control-label">Focus Clicked</label>
+        <div class="controls controls-fill ">
+            <splunk-radio-input name="display.visualizations.custom.retail-map-viz.map_viz.focusClicked" value="1">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </splunk-radio-input> 
+            <span class="help-block ">Clicked markers will gain focus by dimming unclicked markers and paths.</span> 
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Unfocused Opacity</label>
+        <div class="controls controls-block">
+            <splunk-text-input name="display.visualizations.custom.retail-map-viz.map_viz.unfocusedOpacity" value="0.1"></splunk-text-input>
+            <span class="help-block ">Opacity of markers and paths that are unfocused. Floating point number between 0 (hidden) and 1 (solid) - (Default: 0.1)</span> 
+        </div>
+    </div>
 </form>
 <form class="splunk-formatter-section" section-label="Overlays">
     <div class="control-group">

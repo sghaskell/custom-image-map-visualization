@@ -34,11 +34,16 @@ define([
             'display.visualizations.custom.retail-map-viz.map_viz.mapCenterY': 0,
             'display.visualizations.custom.retail-map-viz.map_viz.minZoom': 0,
             'display.visualizations.custom.retail-map-viz.map_viz.maxZoom': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.showPath': 1
+            'display.visualizations.custom.retail-map-viz.map_viz.showPath': 1,
+            'display.visualizations.custom.retail-map-viz.map_viz.focusClicked': 1,
+            'display.visualizations.custom.retail-map-viz.map_viz.unfocusedOpacity': 0.1
         },
         peeps: {},
+		clickedPeeps: [],
+		isFocused: false,
+
 		// Peep object used to represent a user on the map
-        peep: function(description,
+		peep: function(description,
 					   currentPos,
 					   lastSeen,
 					   maxAge,
@@ -46,48 +51,69 @@ define([
 					   markerColor,
 					   icon,
 					   prefix,
-				       extraClasses) {
+					   extraClasses,
+					   unfocusedOpacity,
+					   pathOpacity) {
 
-            if(iconColor) {
-                this.iconColor = iconColor;
-            } else {
+			if(iconColor) {
+				this.iconColor = iconColor;
+			} else {
 				// Randomly generate Hex color if iconColor is not present
-                this.iconColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
-            }
+				this.iconColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+			}
 
 			// Assign values
-            this.description = description;
-            this.currentPos = currentPos; 
-            this.coordinates = [];
-            this.coordinates.push(currentPos);
+			this.description = description;
+			this.currentPos = currentPos;
+			this.coordinates = [];
+			this.coordinates.push(currentPos);
 
 			// Create marker icon
-            this.markerIcon = L.AwesomeMarkers.icon({prefix: prefix,
-                                                     markerColor: markerColor,
-                                                     icon: icon,
-                                                     extraClasses: extraClasses,
-                                                     iconColor: this.iconColor});
+			this.markerIcon = L.AwesomeMarkers.icon({prefix: prefix,
+													 markerColor: markerColor,
+													 icon: icon,
+													 extraClasses: extraClasses,
+													 iconColor: this.iconColor});
 			// Init layerGroup for this peep
-            this.layerGroup= L.layerGroup();
-            this.lastSeen = lastSeen;
-            this.marker = null;
-            this.path = null;
-            this.drilldownFields = null;
-            this.maxAge = maxAge;
+			this.layerGroup= L.layerGroup();
+			this.lastSeen = lastSeen;
+			this.marker = null;
+			this.path = null;
+			this.drilldownFields = null;
+			this.maxAge = maxAge;
+			this.isClicked = false;
+			this.pathOpacity = pathOpacity;
+			this.unfocusedOpacity = unfocusedOpacity;
+
+			this.dimMarker = function () {
+				this.marker.setOpacity(this.unfocusedOpacity);
+			};
+
+			this.unDimMarker = function () {
+				this.marker.setOpacity(1.0);
+			};
+
+			this.dimPath = function () {
+				this.path.setStyle({opacity: this.unfocusedOpacity});
+			};
+
+			this.unDimPath = function () {
+				this.path.setStyle({opacity: this.pathOpacity});
+			};
 
 			// Used to determine whether to remove peep from map
-            this.isAgedOut = function() {
-                var dt1 = new Date();
-                var dt2 = new Date(this.lastSeen);
-                var diff = Math.abs(dt1-dt2);
-                if(diff > this.maxAge) {
-                    console.log("Removing " + this.description);
-                    return true;
-                } else {
-                    return false;
-                }
-            };
-        },
+			this.isAgedOut = function() {
+				var dt1 = new Date();
+				var dt2 = new Date(this.lastSeen);
+				var diff = Math.abs(dt1-dt2);
+				if(diff > this.maxAge) {
+					console.log("Removing " + this.description);
+					return true;
+				} else {
+					return false;
+				}
+			};
+		},
 
 		// Used to check mapHeight and mapWidth and throw an error if the values are missing
 		checkNan: function(val, field) {
@@ -138,6 +164,41 @@ define([
 
             this.drilldown(payload);
         },
+
+		_dimMarkers: function(p, obj) {
+			console.log(p, obj);
+			this.isFocused = true;
+			p.isClicked = true;
+			this.clickedPeeps.push(p.description);
+			console.log(this.clickedPeeps);
+			p.unDimMarker();
+			p.unDimPath();
+
+			_.each(this.peeps, function(peep, i) {
+							if($.inArray(peep.description, this.clickedPeeps) === -1) {
+					peep.dimMarker();
+					peep.dimPath();
+				}
+			},this);
+		},
+
+		_unDimMarkers: function(p, obj) {
+			console.log(p, obj);
+			p.isClicked = false;
+			this.clickedPeeps = _.without(this.clickedPeeps, p.description);
+			console.log(this.clickedPeeps);
+
+			if(this.clickedPeeps.length === 0) {
+				this.isFocused = false;
+				_.each(this.peeps, function(peep, i) {
+					peep.unDimMarker();
+					peep.unDimPath();
+				},this);
+			} else {
+				p.dimMarker();
+				p.dimPath();
+			}
+		},
 
         // Convert string '1/0' or 'true/false' to boolean true/false
         isArgTrue: function(arg) {
@@ -236,6 +297,8 @@ define([
                 maxZoom     = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.maxZoom']),
                 kmlOverlay  = config['display.visualizations.custom.retail-map-viz.map_viz.kmlOverlay'],
                 showPath = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.showPath'])
+                focusClicked = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.focusClicked'])
+                unfocusedOpacity = parseFloat(config['display.visualizations.custom.retail-map-viz.map_viz.unfocusedOpacity'])
 
             this.checkNan(mapHeight, "Map Height");
             this.checkNan(mapWidth, "Map Width");
@@ -372,10 +435,12 @@ define([
 												 markerColor,
 											 	 icon,
 												 prefix,
-												 extraClasses);
+												 extraClasses,
+												 unfocusedOpacity,
+												 pathOpacity);
                     thisPeep.pathWeight = pathWeight;
-                    thisPeep.pathOpacity = pathOpacity;
                     thisPeep.title = title;
+
                     // Add drilldown field/values
                     if (this.isArgTrue(drilldown)) {
                         var drilldownFields = this.validateFields(userData);
@@ -385,42 +450,56 @@ define([
                 }
             }, this);            
 
-            // Iterate through peep objects and plot markers/paths
-            _.each(this.peeps, function(peep, i) {
-                // Check age of marker and remove from map
-                if(peep.isAgedOut()) {
-                    peep.layerGroup.clearLayers();
-                    delete this.peeps[i];
-                }
+			// Iterate through peep objects and plot markers/paths
+			_.each(this.peeps, function(peep, i) {
+				// Check age of marker and remove from map
+				if(peep.isAgedOut()) {
+					peep.layerGroup.clearLayers();
+					delete this.peeps[i];
+				}
 
 				// marker exists, update with latest position
-                if(peep.marker) {
-                    peep.marker.setLatLng(peep.currentPos);
-                } else {
+				if(peep.marker) {
+					peep.marker.setLatLng(peep.currentPos).update();
+				} else {
 					// Add peeps marker to its layer group and stick on the map
-                    peep.layerGroup.addTo(this.map);
-                    if(this.isArgTrue(allPopups)) {
-                        peep.marker = L.marker(peep.currentPos, {icon: peep.markerIcon, title: peep.title}).bindPopup(peep.description).addTo(peep.layerGroup).openPopup();
-                    } else {
-                        peep.marker = L.marker(peep.currentPos, {icon: peep.markerIcon, title: peep.title}).bindPopup(peep.description).addTo(peep.layerGroup);
-                    }
-                    // Bind drilldown if enabled
-                    if (this.isArgTrue(drilldown)) {
-                        peep.marker.on('dblclick', this._drilldown.bind(this, peep.drilldownFields)); 
-                    }
-                }
-                if(this.isArgTrue(showPath)) {
-                    if(peep.path) {
+					peep.layerGroup.addTo(this.map);
+					if(this.isArgTrue(allPopups)) {
+						peep.marker = L.marker(peep.currentPos, {icon: peep.markerIcon, title: peep.title}).bindPopup(peep.description).openPopup();
+					} else {
+						peep.marker = L.marker(peep.currentPos, {icon: peep.markerIcon, title: peep.title}).bindPopup(peep.description);
+					}
+					peep.marker.addTo(peep.layerGroup);
+
+					if(this.isArgTrue(focusClicked)) {
+						peep.marker.on('popupopen', this._dimMarkers.bind(this, peep));
+						peep.marker.on('popupclose', this._unDimMarkers.bind(this, peep));
+					}
+
+					// Bind drilldown if enabled
+					if (this.isArgTrue(drilldown)) {
+						peep.marker.on('dblclick', this._drilldown.bind(this, peep.drilldownFields));
+					}
+				}
+				if(this.isArgTrue(showPath)) {
+					if(peep.path) {
 						// update the path coordinates
-                        peep.path.setLatLngs(peep.coordinates);
-                    } else {
+						peep.path.setLatLngs(peep.coordinates);
+					} else {
 						// Add path to peeps layerGroup and draw on the map
-                        peep.path = L.polyline(peep.coordinates, {weight: peep.pathWeight,
-                                                                  opacity: peep.pathOpacity,
-                                                                  color: peep.iconColor}).addTo(peep.layerGroup);
-                    }
-                }
-            }, this);
+						peep.path = L.polyline(peep.coordinates, {weight: peep.pathWeight,
+																  opacity: peep.pathOpacity,
+																  color: peep.iconColor}).addTo(peep.layerGroup);
+					}
+				}
+
+				// Currently focused, dim marker and path
+				if(this.isFocused && !peep.isClicked) {
+					peep.dimMarker();
+					peep.dimPath();
+				}
+
+			}, this);
             // END PROCESSING DATA
 
             // Chunk through data 50k results at a time
