@@ -224,7 +224,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 				p.unDimPath();
 
 				_.each(this.peeps, function(peep, i) {
-								if($.inArray(peep.description, this.clickedPeeps) === -1) {
+					if($.inArray(peep.description, this.clickedPeeps) === -1) {
 						peep.dimMarker();
 						peep.dimPath();
 					}
