@@ -39,6 +39,7 @@ define([
             'display.visualizations.custom.retail-map-viz.map_viz.unfocusedOpacity': 0.1
         },
         peeps: {},
+		iconColors: [],
 		clickedPeeps: [],
 		isFocused: false,
 
@@ -53,37 +54,19 @@ define([
 					   prefix,
 					   extraClasses,
 					   unfocusedOpacity,
-					   pathOpacity) {
+					   pathOpacity,
+					   that) {
 
-			if(iconColor) {
-				this.iconColor = iconColor;
-			} else {
-				// Randomly generate Hex color if iconColor is not present
-				this.iconColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
-			}
-
-			// Assign values
-			this.description = description;
-			this.currentPos = currentPos;
-			this.coordinates = [];
-			this.coordinates.push(currentPos);
-
-			// Create marker icon
-			this.markerIcon = L.AwesomeMarkers.icon({prefix: prefix,
-													 markerColor: markerColor,
-													 icon: icon,
-													 extraClasses: extraClasses,
-													 iconColor: this.iconColor});
-			// Init layerGroup for this peep
-			this.layerGroup= L.layerGroup();
-			this.lastSeen = lastSeen;
-			this.marker = null;
-			this.path = null;
-			this.drilldownFields = null;
-			this.maxAge = maxAge;
-			this.isClicked = false;
-			this.pathOpacity = pathOpacity;
-			this.unfocusedOpacity = unfocusedOpacity;
+			this.genIconColor = function () {
+				var icolor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+				if($.inArray(icolor, that.iconColors) === -1) {
+					that.iconColors.push(icolor);
+					return icolor;
+				} else {
+					console.log("Found dupe icon color. Re-generating");
+					this.genIconColor();
+				}
+			};
 
 			this.dimMarker = function () {
 				this.marker.setOpacity(this.unfocusedOpacity);
@@ -117,6 +100,35 @@ define([
 					return false;
 				}
 			};
+
+			if(iconColor) {
+				this.iconColor = iconColor;
+			} else {
+				this.iconColor = this.genIconColor();
+			}
+
+			// Assign values
+			this.description = description;
+			this.currentPos = currentPos;
+			this.coordinates = [];
+			this.coordinates.push(currentPos);
+
+			// Create marker icon
+			this.markerIcon = L.AwesomeMarkers.icon({prefix: prefix,
+													 markerColor: markerColor,
+													 icon: icon,
+													 extraClasses: extraClasses,
+													 iconColor: this.iconColor});
+			// Init layerGroup for this peep
+			this.layerGroup= L.layerGroup();
+			this.lastSeen = lastSeen;
+			this.marker = null;
+			this.path = null;
+			this.drilldownFields = null;
+			this.maxAge = maxAge;
+			this.isClicked = false;
+			this.pathOpacity = pathOpacity;
+			this.unfocusedOpacity = unfocusedOpacity;
 		},
 
 		// Used to check mapHeight and mapWidth and throw an error if the values are missing
@@ -441,7 +453,8 @@ define([
 												 prefix,
 												 extraClasses,
 												 unfocusedOpacity,
-												 pathOpacity);
+												 pathOpacity,
+												 this);
                     thisPeep.pathWeight = pathWeight;
                     thisPeep.title = title;
 
@@ -459,6 +472,7 @@ define([
 				// Check age of marker and remove from map
 				if(peep.isAgedOut()) {
 					peep.layerGroup.clearLayers();
+					this.iconColors = _.without(this.iconColors, peep.iconColor);
 					delete this.peeps[i];
 				}
 
