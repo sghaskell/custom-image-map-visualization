@@ -111,9 +111,9 @@ index=demo
 ###### Map Image
 Copy an image file to `$SPLUNK_HOME/etc/apps/retail-map-viz/appserver/static/visualizations/map_viz/contrib/images` and reference that image file name in this field. 
 ###### Map Height
-Specify the height of your image in pixels.
+Specify the height of your image in pixels. **REQUIRED**
 ###### Map Width
-Specify the width of your image in pixels.
+Specify the width of your image in pixels. **REQUIRED**
 ###### Scroll Wheel Zoom
 Enable or disable scroll wheel zoom.
 ###### Full Screen Mode
