@@ -109,7 +109,7 @@ index=demo
 # Formatting Options
 ### Map
 ###### Map Image
-Upload an image file to `$SPLUNK_HOME/etc/apps/retail-map-viz/appserver/static/visualizations/map_viz/contrib/images` and reference that image file name in this field. 
+Copy an image file to `$SPLUNK_HOME/etc/apps/retail-map-viz/appserver/static/visualizations/map_viz/contrib/images` and reference that image file name in this field. 
 ###### Map Height
 Specify the height of your image in pixels.
 ###### Map Width
