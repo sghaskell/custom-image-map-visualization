@@ -1,7 +1,7 @@
 # Splunk Custom Visualization
 
 # Synopsis
-Custom visualization to map x,y coordinates on a flat image using Leaflet Maps.
+Custom visualization to map x,y coordinates in pixels on a flat image using Leaflet Maps.
 
 # Credits
 ### Included Open Source Software
