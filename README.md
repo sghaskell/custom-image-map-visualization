@@ -85,7 +85,7 @@ Click 'Format' and selct the 'Overlays' tab. Enter a comma separated list of fil
 The files will be asynchronously loaded when the map is rendered.
 
 # Search Examples
-### Basic plot of latitude and longitude
+
 ```
 index=demo
 |eval s1signal=if(like(MERCHANTID,"%s1"),s,"")
