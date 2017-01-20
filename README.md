@@ -26,25 +26,39 @@ This app only works with **Splunk 6.4+** as it relies on the new [Custom Visuali
 `base_search | table _time, coordinates, description [ title | icon | markerColor | iconColor | prefix | extraClasses | maxAge | pathWeight | pathOpacity]`
 
 # Required Fields
-**_time** - Splunk time field.
-**coordinates** - comma separated field of coordinates in y,x format. If coordinate fields are named `x` and `y` use eval to combine; `| eval coordinates=y.",".x`
-**description** - Unique identifier for marker. Field is displayed in a pop-up when then marker is clicked on the map. You can get creative with this field. Combine a bunch of other fields or lookups using eval to make the description full of detail. **This field supports HTML**.
+##### _time
+Splunk time field.
+
+##### coordinates
+comma separated field of coordinates in y,x format. If coordinate fields are named `x` and `y` use eval to combine; `| eval coordinates=y.",".x`
+
+##### description
+Unique identifier for marker. Field is displayed in a pop-up when then marker is clicked on the map. You can get creative with this field. Combine a bunch of other fields or lookups using eval to make the description full of detail. **This field supports HTML**.
 
 # Optional Fields
-**maxAge** - Time in seconds for age of marker in a real-time search. If a new event for the marker has not been seen within this time range, the marker and path will be removed from the map. (Default: 60 seconds)
+##### maxAge
+Time in seconds for age of marker in a real-time search. If a new event for the marker has not been seen within this time range, the marker and path will be removed from the map. (Default: 60 seconds)
 
 # Style Markers And Icons Dynamically Through SPL
 ### Feature Description
 The visualization allows you to dynamically style map markers and add icons via SPL. Create fields using [eval](http://docs.splunk.com/Documentation/Splunk/6.4.0/SearchReference/CommonEvalFunctions) to define colors for the marker or use an icon from [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/) or [ionicons](http://ionicons.com/). If you find the color set of icons too limiting, feel free to override the map marker icon with a map icon from Font Awesome and style it with any hex color or RGB value.
 ### Available Fields and Values
-**title** - Icon mouse hover over description.
-**icon** - Icon displayed in map marker - Any icon from [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/) or [ionicons](http://ionicons.com/). **Default** circle
-**markerColor** - Color of map marker - red, darkred, lightred, orange, beige, green, darkgreen, lightgreen, blue, darkblue, lightblue, purple, darkpurple, pink, cadetblue, white, gray, lightgray, black. **Default** blue
-**iconColor** - Color of icon - Any [CSS color name](https://www.vogatek.com/html-tutorials/cssref/css_colornames.asp.html), [Hex or RGB value](http://www.w3schools.com/colors/colors_picker.asp). **Default** white.
-**prefix** - 'fa' for Font Awesome or 'ion' for ionicons. **Default** 'fa'
-**extraClasses** - Any extra CSS classes you wish to add for styling. Here are some [additional classes](http://fortawesome.github.io/Font-Awesome/examples/) you can use with Font Awesome to change the styling.
-**pathWeight** - Weight (width) of path if **Show Path** setting is enabled
-**pathOpacity** - Opacity of path line if **Show Path** setting is enabled
+##### title
+Icon mouse hover over description.
+##### icon
+Icon displayed in map marker - Any icon from [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/) or [ionicons](http://ionicons.com/). **Default** circle
+##### markerColor
+Color of map marker - red, darkred, lightred, orange, beige, green, darkgreen, lightgreen, blue, darkblue, lightblue, purple, darkpurple, pink, cadetblue, white, gray, lightgray, black. **Default** blue
+##### iconColor
+Color of icon - Any [CSS color name](https://www.vogatek.com/html-tutorials/cssref/css_colornames.asp.html), [Hex or RGB value](http://www.w3schools.com/colors/colors_picker.asp). **Default** white.
+##### prefix
+'fa' for Font Awesome or 'ion' for ionicons. **Default** 'fa'
+##### extraClasses
+Any extra CSS classes you wish to add for styling. Here are some [additional classes](http://fortawesome.github.io/Font-Awesome/examples/) you can use with Font Awesome to change the styling.
+##### pathWeight
+Weight (width) of path if **Show Path** setting is enabled
+##### pathOpacity
+Opacity of path line if **Show Path** setting is enabled
 
 # Drilldown
 The visualization will identify any non-standard fields and make them available as drilldown fields if the **Drilldown** setting is enabled. Simply add any fields you wish to the final table command and you'll have access to them via drilldown in Simple XML. See the [documentation on dynamic drilldown](http://docs.splunk.com/Documentation/Splunk/6.5.1/Viz/Dynamicdrilldownindashboardsandforms). Refer to this section of the docs on [accessing tokens for dynamic drilldown](http://docs.splunk.com/Documentation/Splunk/latest/Viz/tokens#Define_tokens_for_dynamic_drilldown).
