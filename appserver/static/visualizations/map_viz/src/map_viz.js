@@ -425,7 +425,7 @@ define([
                 var latlng = L.latLng(coordinates);
                 var description = userData["description"];
                 var lastSeen = (_.has(userData, "_time")) ? userData["_time"]:new Date();
-                var maxAge = (_.has(userData, "maxAge")) ? userData["maxAge"]*1000:60000;
+                var maxAge = (_.has(userData, "maxAge")) ? userData["maxAge"]*1000:null;
                 var pathWeight = (_.has(userData, "pathWeight")) ? userData["pathWeight"]:5;
                 var pathOpacity = (_.has(userData, "pathOpacity")) ? userData["pathOpacity"]:0.5;
                 var iconColor = (_.has(userData, "iconColor")) ? userData["iconColor"]:null;
@@ -470,10 +470,12 @@ define([
 			// Iterate through peep objects and plot markers/paths
 			_.each(this.peeps, function(peep, i) {
 				// Check age of marker and remove from map
-				if(peep.isAgedOut()) {
-					peep.layerGroup.clearLayers();
-					this.iconColors = _.without(this.iconColors, peep.iconColor);
-					delete this.peeps[i];
+				if(peep.maxAge) {
+					if(peep.isAgedOut()) {
+						peep.layerGroup.clearLayers();
+						this.iconColors = _.without(this.iconColors, peep.iconColor);
+						delete this.peeps[i];
+					}
 				}
 
 				// marker exists, update with latest position
