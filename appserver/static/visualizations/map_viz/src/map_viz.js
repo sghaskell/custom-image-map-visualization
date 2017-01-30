@@ -470,10 +470,12 @@ define([
 			// Iterate through peep objects and plot markers/paths
 			_.each(this.peeps, function(peep, i) {
 				// Check age of marker and remove from map
-				if(peep.isAgedOut()) {
-					peep.layerGroup.clearLayers();
-					this.iconColors = _.without(this.iconColors, peep.iconColor);
-					delete this.peeps[i];
+				if(peep.maxAge) {
+					if(peep.isAgedOut()) {
+						peep.layerGroup.clearLayers();
+						this.iconColors = _.without(this.iconColors, peep.iconColor);
+						delete this.peeps[i];
+					}
 				}
 
 				// marker exists, update with latest position

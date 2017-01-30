@@ -37,7 +37,7 @@ Unique identifier for marker. Field is displayed in a pop-up when then marker is
 
 # Optional Fields
 ##### maxAge
-Time in seconds for age of marker in a real-time search. If a new event for the marker has not been seen within this time range, the marker and path will be removed from the map. (Default: 60 seconds)
+Time in seconds for age of marker in a real-time search. If a new event for the marker has not been seen within this time range, the marker and path will be removed from the map. **Only use with real-time search, not static time ranges** (Default: 60 seconds)
 
 # Style Markers And Icons Dynamically Through SPL
 ### Feature Description
