@@ -35,12 +35,12 @@
         <color>7d00ff00</color>
       </PolyStyle>
     </Style>
-    <Style id="transYellowPoly">
+    <Style id="transOrangePoly">
       <LineStyle>
         <width>1.5</width>
       </LineStyle>
       <PolyStyle>
-        <color>7d00ffff</color>
+        <color>500078F0</color>
       </PolyStyle>
     </Style>
     <Folder>
@@ -64,7 +64,7 @@
       <Placemark>
         <name>Front</name>
         <description>Front</description>
-        <styleUrl>#transYellowPoly</styleUrl>
+        <styleUrl>#transOrangePoly</styleUrl>
         <Polygon>
           <extrude>1</extrude>
           <altitudeMode>relativeToGround</altitudeMode>
@@ -104,8 +104,8 @@
           <altitudeMode>relativeToGround</altitudeMode>
           <outerBoundaryIs>
             <LinearRing>
-              <coordinates>133.0,323.0
-                274.5,323.0
+              <coordinates>133.0,323.5
+                274.5,323.5
                 320.0,224.0
                 133.0,224.0</coordinates>
             </LinearRing>
