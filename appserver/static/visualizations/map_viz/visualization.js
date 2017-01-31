@@ -285,14 +285,17 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	                        var kmlText = $.parseXML(text);
 	                        var geojson = toGeoJSON.kml(kmlText);
 
-	                        L.geoJson(geojson.features, {
-	                            style: function (feature) {
-	                                 return feature.properties.style;
-	                             },
-	                             onEachFeature: function (feature, layer) {
-	                                 layer.bindPopup(feature.properties.name);
-	                            }
-	                        }).addTo(map);
+							L.geoJson(geojson.features, {
+								style: function (feature) {
+									return {color: feature.properties.fill,
+											opacity: feature.properties["fill-opacity"],
+											weight: feature.properties["stroke-width"]};
+								},
+								onEachFeature: function (feature, layer) {
+									layer.bindPopup(feature.properties.name);
+									layer.bindTooltip(feature.properties.name);
+								}
+							}).addTo(map);
 	                    });
 	                });
 	            // it's a kml file
@@ -300,19 +303,19 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	                $.ajax({url: url, dataType: 'xml', context: this}).done(function(text) {
 	                    console.log(text);
 	                    var kmlText = $.parseXML(text);
-	                    //console.log(kmlText);
-	                    //var geojson = toGeoJSON.kml(kmlText);
 	                    var geojson = toGeoJSON.kml(text);
-	                    console.log(geojson)
 
-	                    L.geoJson(geojson.features, {
-	                        style: function (feature) {
-	                             return feature.properties.style;
-	                         },
-	                         onEachFeature: function (feature, layer) {
-	                             layer.bindPopup(feature.properties.name);
-	                        }
-	                    }).addTo(map);
+						L.geoJson(geojson.features, {
+							style: function (feature) {
+								return {color: feature.properties.fill,
+										opacity: feature.properties["fill-opacity"],
+										weight: feature.properties["stroke-width"]};
+							 },
+							 onEachFeature: function (feature, layer) {
+								 layer.bindPopup(feature.properties.name);
+								 layer.bindTooltip(feature.properties.name);
+							}
+						}).addTo(map);
 	                });
 	            }
 	        },
