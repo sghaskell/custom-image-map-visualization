@@ -21,22 +21,22 @@ define([
         ) {
 
     return SplunkVisualizationBase.extend({
-        contribUri: '/en-US/static/app/retail-map-viz/visualizations/map_viz/contrib/',
+        contribUri: '/en-US/static/app/custom-image-map-viz/visualizations/map_viz/contrib/',
         defaultConfig:  {
-            'display.visualizations.custom.retail-map-viz.map_viz.allPopups': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.multiplePopups': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.scrollWheelZoom': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.fullScreen': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.drilldown': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.defaultHeight': 600,
-            'display.visualizations.custom.retail-map-viz.map_viz.mapCenterZoom': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.mapCenterX': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.mapCenterY': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.minZoom': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.maxZoom': 0,
-            'display.visualizations.custom.retail-map-viz.map_viz.showPath': 1,
-            'display.visualizations.custom.retail-map-viz.map_viz.focusClicked': 1,
-            'display.visualizations.custom.retail-map-viz.map_viz.unfocusedOpacity': 0.1
+            'display.visualizations.custom.custom-image-map-viz.map_viz.allPopups': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.multiplePopups': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.scrollWheelZoom': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.fullScreen': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.drilldown': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.defaultHeight': 600,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterZoom': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterX': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterY': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.minZoom': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.maxZoom': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.showPath': 1,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.focusClicked': 1,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.unfocusedOpacity': 0.1
         },
         peeps: {},
 		iconColors: [],
@@ -300,24 +300,24 @@ define([
             }
 
             // get configs
-            var mapImage = SplunkVisualizationUtils.makeSafeUrl(config['display.visualizations.custom.retail-map-viz.map_viz.mapImage']),
-                mapHeight = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.mapHeight']),
-                mapWidth = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.mapWidth']),
-                allPopups   = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.allPopups']),
-                multiplePopups = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.multiplePopups']),
-                scrollWheelZoom = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.scrollWheelZoom']),
-                fullScreen = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.fullScreen']),
-                drilldown = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.drilldown']),
-                defaultHeight = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.defaultHeight']),
-                mapCenterZoom = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.mapCenterZoom']),
-                mapCenterX = parseFloat(config['display.visualizations.custom.retail-map-viz.map_viz.mapCenterX']),
-                mapCenterY = parseFloat(config['display.visualizations.custom.retail-map-viz.map_viz.mapCenterY']),
-                minZoom     = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.minZoom']),
-                maxZoom     = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.maxZoom']),
-                kmlOverlay  = config['display.visualizations.custom.retail-map-viz.map_viz.kmlOverlay'],
-                showPath = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.showPath'])
-                focusClicked = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.focusClicked'])
-                unfocusedOpacity = parseFloat(config['display.visualizations.custom.retail-map-viz.map_viz.unfocusedOpacity'])
+            var mapImage = SplunkVisualizationUtils.makeSafeUrl(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapImage']),
+                mapHeight = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapHeight']),
+                mapWidth = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapWidth']),
+                allPopups   = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.allPopups']),
+                multiplePopups = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.multiplePopups']),
+                scrollWheelZoom = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.scrollWheelZoom']),
+                fullScreen = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.fullScreen']),
+                drilldown = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.drilldown']),
+                defaultHeight = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.defaultHeight']),
+                mapCenterZoom = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterZoom']),
+                mapCenterX = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterX']),
+                mapCenterY = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterY']),
+                minZoom     = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.minZoom']),
+                maxZoom     = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.maxZoom']),
+                kmlOverlay  = config['display.visualizations.custom.custom-image-map-viz.map_viz.kmlOverlay'],
+                showPath = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.showPath'])
+                focusClicked = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.focusClicked'])
+                unfocusedOpacity = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.unfocusedOpacity'])
 
             this.checkNan(mapHeight, "Map Height");
             this.checkNan(mapWidth, "Map Width");

@@ -66,22 +66,22 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	        ) {
 
 	    return SplunkVisualizationBase.extend({
-	        contribUri: '/en-US/static/app/retail-map-viz/visualizations/map_viz/contrib/',
+	        contribUri: '/en-US/static/app/custom-image-map-viz/visualizations/map_viz/contrib/',
 	        defaultConfig:  {
-	            'display.visualizations.custom.retail-map-viz.map_viz.allPopups': 0,
-	            'display.visualizations.custom.retail-map-viz.map_viz.multiplePopups': 0,
-	            'display.visualizations.custom.retail-map-viz.map_viz.scrollWheelZoom': 0,
-	            'display.visualizations.custom.retail-map-viz.map_viz.fullScreen': 0,
-	            'display.visualizations.custom.retail-map-viz.map_viz.drilldown': 0,
-	            'display.visualizations.custom.retail-map-viz.map_viz.defaultHeight': 600,
-	            'display.visualizations.custom.retail-map-viz.map_viz.mapCenterZoom': 0,
-	            'display.visualizations.custom.retail-map-viz.map_viz.mapCenterX': 0,
-	            'display.visualizations.custom.retail-map-viz.map_viz.mapCenterY': 0,
-	            'display.visualizations.custom.retail-map-viz.map_viz.minZoom': 0,
-	            'display.visualizations.custom.retail-map-viz.map_viz.maxZoom': 0,
-	            'display.visualizations.custom.retail-map-viz.map_viz.showPath': 1,
-	            'display.visualizations.custom.retail-map-viz.map_viz.focusClicked': 1,
-	            'display.visualizations.custom.retail-map-viz.map_viz.unfocusedOpacity': 0.1
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.allPopups': 0,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.multiplePopups': 0,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.scrollWheelZoom': 0,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.fullScreen': 0,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.drilldown': 0,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.defaultHeight': 600,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterZoom': 0,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterX': 0,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterY': 0,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.minZoom': 0,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.maxZoom': 0,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.showPath': 1,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.focusClicked': 1,
+	            'display.visualizations.custom.custom-image-map-viz.map_viz.unfocusedOpacity': 0.1
 	        },
 	        peeps: {},
 			iconColors: [],
@@ -345,24 +345,24 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	            }
 
 	            // get configs
-	            var mapImage = SplunkVisualizationUtils.makeSafeUrl(config['display.visualizations.custom.retail-map-viz.map_viz.mapImage']),
-	                mapHeight = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.mapHeight']),
-	                mapWidth = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.mapWidth']),
-	                allPopups   = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.allPopups']),
-	                multiplePopups = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.multiplePopups']),
-	                scrollWheelZoom = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.scrollWheelZoom']),
-	                fullScreen = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.fullScreen']),
-	                drilldown = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.drilldown']),
-	                defaultHeight = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.defaultHeight']),
-	                mapCenterZoom = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.mapCenterZoom']),
-	                mapCenterX = parseFloat(config['display.visualizations.custom.retail-map-viz.map_viz.mapCenterX']),
-	                mapCenterY = parseFloat(config['display.visualizations.custom.retail-map-viz.map_viz.mapCenterY']),
-	                minZoom     = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.minZoom']),
-	                maxZoom     = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.maxZoom']),
-	                kmlOverlay  = config['display.visualizations.custom.retail-map-viz.map_viz.kmlOverlay'],
-	                showPath = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.showPath'])
-	                focusClicked = parseInt(config['display.visualizations.custom.retail-map-viz.map_viz.focusClicked'])
-	                unfocusedOpacity = parseFloat(config['display.visualizations.custom.retail-map-viz.map_viz.unfocusedOpacity'])
+	            var mapImage = SplunkVisualizationUtils.makeSafeUrl(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapImage']),
+	                mapHeight = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapHeight']),
+	                mapWidth = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapWidth']),
+	                allPopups   = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.allPopups']),
+	                multiplePopups = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.multiplePopups']),
+	                scrollWheelZoom = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.scrollWheelZoom']),
+	                fullScreen = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.fullScreen']),
+	                drilldown = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.drilldown']),
+	                defaultHeight = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.defaultHeight']),
+	                mapCenterZoom = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterZoom']),
+	                mapCenterX = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterX']),
+	                mapCenterY = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterY']),
+	                minZoom     = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.minZoom']),
+	                maxZoom     = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.maxZoom']),
+	                kmlOverlay  = config['display.visualizations.custom.custom-image-map-viz.map_viz.kmlOverlay'],
+	                showPath = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.showPath'])
+	                focusClicked = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.focusClicked'])
+	                unfocusedOpacity = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.unfocusedOpacity'])
 
 	            this.checkNan(mapHeight, "Map Height");
 	            this.checkNan(mapWidth, "Map Width");
@@ -11972,12 +11972,12 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
-	 Leaflet 1.0.2, a JS library for interactive maps. http://leafletjs.com
+	 Leaflet 1.0.3, a JS library for interactive maps. http://leafletjs.com
 	 (c) 2010-2016 Vladimir Agafonkin, (c) 2010-2011 CloudMade
 	*/
 	(function (window, document, undefined) {
 	var L = {
-		version: "1.0.2"
+		version: "1.0.3"
 	};
 
 	function expose() {
@@ -12489,7 +12489,6 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			}
 
 			listeners.push(newListener);
-			typeListeners.count++;
 		},
 
 		_off: function (type, fn, context) {
@@ -12797,6 +12796,9 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 			// @property touch: Boolean
 			// `true` for all browsers supporting [touch events](https://developer.mozilla.org/docs/Web/API/Touch_events).
+			// This does not necessarily mean that the browser is running in a computer with
+			// a touchscreen, it only means that the browser is capable of understanding
+			// touch events.
 			touch: !!touch,
 
 			// @property msPointer: Boolean
@@ -13635,7 +13637,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 		},
 
 		// @method toBounds(sizeInMeters: Number): LatLngBounds
-		// Returns a new `LatLngBounds` object in which each boundary is `sizeInMeters` meters apart from the `LatLng`.
+		// Returns a new `LatLngBounds` object in which each boundary is `sizeInMeters/2` meters apart from the `LatLng`.
 		toBounds: function (sizeInMeters) {
 			var latAccuracy = 180 * sizeInMeters / 40075017,
 			    lngAccuracy = latAccuracy / Math.cos((Math.PI / 180) * this.lat);
@@ -13842,7 +13844,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 		// @method contains (latlng: LatLng): Boolean
 		// Returns `true` if the rectangle contains the given point.
 		contains: function (obj) { // (LatLngBounds) or (LatLng) -> Boolean
-			if (typeof obj[0] === 'number' || obj instanceof L.LatLng) {
+			if (typeof obj[0] === 'number' || obj instanceof L.LatLng || 'lat' in obj) {
 				obj = L.latLng(obj);
 			} else {
 				obj = L.latLngBounds(obj);
@@ -14105,12 +14107,35 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 		// @method wrapLatLng(latlng: LatLng): LatLng
 		// Returns a `LatLng` where lat and lng has been wrapped according to the
 		// CRS's `wrapLat` and `wrapLng` properties, if they are outside the CRS's bounds.
+		// Only accepts actual `L.LatLng` instances, not arrays.
 		wrapLatLng: function (latlng) {
 			var lng = this.wrapLng ? L.Util.wrapNum(latlng.lng, this.wrapLng, true) : latlng.lng,
 			    lat = this.wrapLat ? L.Util.wrapNum(latlng.lat, this.wrapLat, true) : latlng.lat,
 			    alt = latlng.alt;
 
 			return L.latLng(lat, lng, alt);
+		},
+
+		// @method wrapLatLngBounds(bounds: LatLngBounds): LatLngBounds
+		// Returns a `LatLngBounds` with the same size as the given one, ensuring
+		// that its center is within the CRS's bounds.
+		// Only accepts actual `L.LatLngBounds` instances, not arrays.
+		wrapLatLngBounds: function (bounds) {
+			var center = bounds.getCenter(),
+			    newCenter = this.wrapLatLng(center),
+			    latShift = center.lat - newCenter.lat,
+			    lngShift = center.lng - newCenter.lng;
+
+			if (latShift === 0 && lngShift === 0) {
+				return bounds;
+			}
+
+			var sw = bounds.getSouthWest(),
+			    ne = bounds.getNorthEast(),
+			    newSw = L.latLng({lat: sw.lat - latShift, lng: sw.lng - lngShift}),
+			    newNe = L.latLng({lat: ne.lat - latShift, lng: ne.lng - lngShift});
+
+			return new L.LatLngBounds(newSw, newNe);
 		}
 	};
 
@@ -14278,7 +14303,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 			// @option maxBounds: LatLngBounds = null
 			// When this option is set, the map restricts the view to the given
-			// geographical bounds, bouncing the user back when he tries to pan
+			// geographical bounds, bouncing the user back if the user tries to pan
 			// outside the view. To set the restriction dynamically, use
 			// [`setMaxBounds`](#map-setmaxbounds) method.
 			maxBounds: undefined,
@@ -14485,7 +14510,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			};
 		},
 
-		// @method fitBounds(bounds: LatLngBounds, options: fitBounds options): this
+		// @method fitBounds(bounds: LatLngBounds, options?: fitBounds options): this
 		// Sets a map view that contains the given geographical bounds with the
 		// maximum zoom level possible.
 		fitBounds: function (bounds, options) {
@@ -15014,7 +15039,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			    nw = bounds.getNorthWest(),
 			    se = bounds.getSouthEast(),
 			    size = this.getSize().subtract(padding),
-			    boundsSize = this.project(se, zoom).subtract(this.project(nw, zoom)),
+			    boundsSize = L.bounds(this.project(se, zoom), this.project(nw, zoom)).getSize(),
 			    snap = L.Browser.any3d ? this.options.zoomSnap : 1;
 
 			var scale = Math.min(size.x / boundsSize.x, size.y / boundsSize.y);
@@ -15033,8 +15058,8 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 		getSize: function () {
 			if (!this._size || this._sizeChanged) {
 				this._size = new L.Point(
-					this._container.clientWidth,
-					this._container.clientHeight);
+					this._container.clientWidth || 0,
+					this._container.clientHeight || 0);
 
 				this._sizeChanged = false;
 			}
@@ -15155,6 +15180,16 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			return this.options.crs.wrapLatLng(L.latLng(latlng));
 		},
 
+		// @method wrapLatLngBounds(bounds: LatLngBounds): LatLngBounds
+		// Returns a `LatLngBounds` with the same size as the given one, ensuring that
+		// its center is within the CRS's bounds.
+		// By default this means the center longitude is wrapped around the dateline so its
+		// value is between -180 and +180 degrees, and the majority of the bounds
+		// overlaps the CRS's bounds.
+		wrapLatLngBounds: function (latlng) {
+			return this.options.crs.wrapLatLngBounds(L.latLngBounds(latlng));
+		},
+
 		// @method distance(latlng1: LatLng, latlng2: LatLng): Number
 		// Returns the distance between two geographical coordinates according to
 		// the map's CRS. By default this measures distance in meters.
@@ -15176,7 +15211,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			return L.point(point).add(this._getMapPanePos());
 		},
 
-		// @method containerPointToLatLng(point: Point): Point
+		// @method containerPointToLatLng(point: Point): LatLng
 		// Given a pixel coordinate relative to the map container, returns
 		// the corresponding geographical coordinate (for the current zoom level).
 		containerPointToLatLng: function (point) {
@@ -15862,7 +15897,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 			// @option attribution: String = null
 			// String to be shown in the attribution control, describes the layer data, e.g. "© Mapbox".
-			attribution: null,
+			attribution: null
 		},
 
 		/* @section
@@ -15932,8 +15967,8 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 			this.onAdd(map);
 
-			if (this.getAttribution && this._map.attributionControl) {
-				this._map.attributionControl.addAttribution(this.getAttribution());
+			if (this.getAttribution && map.attributionControl) {
+				map.attributionControl.addAttribution(this.getAttribution());
 			}
 
 			this.fire('add');
@@ -16178,7 +16213,10 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			if (L.Browser.pointer && type.indexOf('touch') === 0) {
 				this.addPointerListener(obj, type, handler, id);
 
-			} else if (L.Browser.touch && (type === 'dblclick') && this.addDoubleTapListener) {
+			} else if (L.Browser.touch && (type === 'dblclick') && this.addDoubleTapListener &&
+			           !(L.Browser.pointer && L.Browser.chrome)) {
+				// Chrome >55 does not need the synthetic dblclicks from addDoubleTapListener
+				// See #5180
 				this.addDoubleTapListener(obj, handler, id);
 
 			} else if ('addEventListener' in obj) {
@@ -16685,7 +16723,9 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			// @option noWrap: Boolean = false
 			// Whether the layer is wrapped around the antimeridian. If `true`, the
 			// GridLayer will only be displayed once at low zoom levels. Has no
-			// effect when the [map CRS](#map-crs) doesn't wrap around.
+			// effect when the [map CRS](#map-crs) doesn't wrap around. Can be used
+			// in combination with [`bounds`](#gridlayer-bounds) to prevent requesting
+			// tiles outside the CRS limits.
 			noWrap: false,
 
 			// @option pane: String = 'tilePane'
@@ -17256,14 +17296,14 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			    sePoint = nwPoint.add(tileSize),
 
 			    nw = map.unproject(nwPoint, coords.z),
-			    se = map.unproject(sePoint, coords.z);
+			    se = map.unproject(sePoint, coords.z),
+			    bounds = new L.LatLngBounds(nw, se);
 
 			if (!this.options.noWrap) {
-				nw = map.wrapLatLng(nw);
-				se = map.wrapLatLng(se);
+				map.wrapLatLngBounds(bounds);
 			}
 
-			return new L.LatLngBounds(nw, se);
+			return bounds;
 		},
 
 		// converts tile coordinates to key for the tile cache
@@ -17449,7 +17489,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	 * @example
 	 *
 	 * ```js
-	 * L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'}).addTo(map);
+	 * L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'}).addTo(map);
 	 * ```
 	 *
 	 * @section URL template
@@ -17635,7 +17675,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 		_tileOnError: function (done, tile, e) {
 			var errorUrl = this.options.errorTileUrl;
-			if (errorUrl) {
+			if (errorUrl && tile.src !== errorUrl) {
 				tile.src = errorUrl;
 			}
 			done(e, tile);
@@ -17973,6 +18013,8 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			return this;
 		},
 
+		// @method setBounds(bounds: LatLngBounds): this
+		// Update the bounds that this ImageOverlay covers
 		setBounds: function (bounds) {
 			this._bounds = bounds;
 
@@ -17995,10 +18037,14 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			return events;
 		},
 
+		// @method getBounds(): LatLngBounds
+		// Get the bounds that this ImageOverlay covers
 		getBounds: function () {
 			return this._bounds;
 		},
 
+		// @method getElement(): HTMLElement
+		// Get the img element that represents the ImageOverlay on the map
 		getElement: function () {
 			return this._image;
 		},
@@ -18466,6 +18512,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 			if (newShadow) {
 				L.DomUtil.addClass(newShadow, classToAdd);
+				newShadow.alt = '';
 			}
 			this._shadow = newShadow;
 
@@ -19321,7 +19368,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 		// @method isPopupOpen(): boolean
 		// Returns `true` if the popup bound to this layer is currently open.
 		isPopupOpen: function () {
-			return this._popup.isOpen();
+			return (this._popup ? this._popup.isOpen() : false);
 		},
 
 		// @method setPopupContent(content: String|HTMLElement|Popup): this
@@ -20595,9 +20642,9 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	 * ```js
 	 * // create a red polyline from an array of LatLng points
 	 * var latlngs = [
-	 * 	[-122.68, 45.51],
-	 * 	[-122.43, 37.77],
-	 * 	[-118.2, 34.04]
+	 * 	[45.51, -122.68],
+	 * 	[37.77, -122.43],
+	 * 	[34.04, -118.2]
 	 * ];
 	 *
 	 * var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
@@ -20611,12 +20658,12 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	 * ```js
 	 * // create a red polyline from an array of arrays of LatLng points
 	 * var latlngs = [
-	 * 	[[-122.68, 45.51],
-	 * 	 [-122.43, 37.77],
-	 * 	 [-118.2, 34.04]],
-	 * 	[[-73.91, 40.78],
-	 * 	 [-87.62, 41.83],
-	 * 	 [-96.72, 32.76]]
+	 * 	[[45.51, -122.68],
+	 * 	 [37.77, -122.43],
+	 * 	 [34.04, -118.2]],
+	 * 	[[40.78, -73.91],
+	 * 	 [41.83, -87.62],
+	 * 	 [32.76, -96.72]]
 	 * ];
 	 * ```
 	 */
@@ -20956,7 +21003,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	 *
 	 * ```js
 	 * // create a red polygon from an array of LatLng points
-	 * var latlngs = [[-111.03, 41],[-111.04, 45],[-104.05, 45],[-104.05, 41]];
+	 * var latlngs = [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]];
 	 *
 	 * var polygon = L.polygon(latlngs, {color: 'red'}).addTo(map);
 	 *
@@ -20968,8 +21015,8 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	 *
 	 * ```js
 	 * var latlngs = [
-	 *   [[-111.03, 41],[-111.04, 45],[-104.05, 45],[-104.05, 41]], // outer ring
-	 *   [[-108.58,37.29],[-108.58,40.71],[-102.50,40.71],[-102.50,37.29]] // hole
+	 *   [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]], // outer ring
+	 *   [[37.29, -108.58],[40.71, -108.58],[40.71, -102.50],[37.29, -102.50]] // hole
 	 * ];
 	 * ```
 	 *
@@ -20978,11 +21025,11 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	 * ```js
 	 * var latlngs = [
 	 *   [ // first polygon
-	 *     [[-111.03, 41],[-111.04, 45],[-104.05, 45],[-104.05, 41]], // outer ring
-	 *     [[-108.58,37.29],[-108.58,40.71],[-102.50,40.71],[-102.50,37.29]] // hole
+	 *     [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]], // outer ring
+	 *     [[37.29, -108.58],[40.71, -108.58],[40.71, -102.50],[37.29, -102.50]] // hole
 	 *   ],
 	 *   [ // second polygon
-	 *     [[-109.05, 37],[-109.03, 41],[-102.05, 41],[-102.04, 37],[-109.05, 38]]
+	 *     [[41, -111.03],[45, -111.04],[45, -104.05],[41, -104.05]]
 	 *   ]
 	 * ];
 	 * ```
@@ -21652,6 +21699,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			container.appendChild(layer._path);
 
 			this._updateStyle(layer);
+			this._layers[L.stamp(layer)] = layer;
 		},
 
 		_addPath: function (layer) {
@@ -21667,6 +21715,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			var container = layer._container;
 			L.DomUtil.remove(container);
 			layer.removeInteractiveTarget(container);
+			delete this._layers[L.stamp(layer)];
 		},
 
 		_updateStyle: function (layer) {
@@ -21788,6 +21837,16 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	 */
 
 	L.Canvas = L.Renderer.extend({
+		getEvents: function () {
+			var events = L.Renderer.prototype.getEvents.call(this);
+			events.viewprereset = this._onViewPreReset;
+			return events;
+		},
+
+		_onViewPreReset: function () {
+			// Set a flag so that a viewprereset+moveend+viewreset only updates&redraws once
+			this._postponeUpdatePaths = true;
+		},
 
 		onAdd: function () {
 			L.Renderer.prototype.onAdd.call(this);
@@ -21809,6 +21868,8 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 		},
 
 		_updatePaths: function () {
+			if (this._postponeUpdatePaths) { return; }
+
 			var layer;
 			this._redrawBounds = null;
 			for (var id in this._layers) {
@@ -21847,6 +21908,15 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 			// Tell paths to redraw themselves
 			this.fire('update');
+		},
+
+		_reset: function () {
+			L.Renderer.prototype._reset.call(this);
+
+			if (this._postponeUpdatePaths) {
+				this._postponeUpdatePaths = false;
+				this._updatePaths();
+			}
 		},
 
 		_initPath: function (layer) {
@@ -21934,6 +22004,11 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 		_redraw: function () {
 			this._redrawRequest = null;
+
+			if (this._redrawBounds) {
+				this._redrawBounds.min._floor();
+				this._redrawBounds.max._ceil();
+			}
 
 			this._clear(); // clear layers in redraw bounds
 			this._draw(); // draw layers
@@ -23298,6 +23373,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 				var count;
 
 				if (L.Browser.pointer) {
+					if ((!L.Browser.edge) || e.pointerType === 'mouse') { return; }
 					count = L.DomEvent._pointersCount;
 				} else {
 					count = e.touches.length;
@@ -23313,9 +23389,11 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 				last = now;
 			}
 
-			function onTouchEnd() {
+			function onTouchEnd(e) {
 				if (doubleTap && !touch.cancelBubble) {
 					if (L.Browser.pointer) {
+						if ((!L.Browser.edge) || e.pointerType === 'mouse') { return; }
+
 						// work around .type being readonly with MSPointer* events
 						var newTouch = {},
 						    prop, i;
@@ -23343,12 +23421,11 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 			obj.addEventListener(touchstart, onTouchStart, false);
 			obj.addEventListener(touchend, onTouchEnd, false);
 
-			// On some platforms (notably, chrome on win10 + touchscreen + mouse),
+			// On some platforms (notably, chrome<55 on win10 + touchscreen + mouse),
 			// the browser doesn't fire touchend/pointerup events but does fire
 			// native dblclicks. See #4127.
-			if (!L.Browser.edge) {
-				obj.addEventListener('dblclick', handler, false);
-			}
+			// Edge 14 also fires native dblclicks, but only for pointerType mouse, see #5180.
+			obj.addEventListener('dblclick', handler, false);
 
 			return this;
 		},
@@ -23423,7 +23500,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 		_addPointerStart: function (obj, handler, id) {
 			var onDown = L.bind(function (e) {
-				if (e.pointerType !== 'mouse' && e.pointerType !== e.MSPOINTER_TYPE_MOUSE) {
+				if (e.pointerType !== 'mouse' && e.MSPOINTER_TYPE_MOUSE && e.pointerType !== e.MSPOINTER_TYPE_MOUSE) {
 					// In IE11, some touch events needs to fire for form controls, or
 					// the controls will stop working. We keep a whitelist of tag names that
 					// need these events. For other target tags, we prevent default on the event.
@@ -24889,7 +24966,8 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 		_initLayout: function () {
 			var className = 'leaflet-control-layers',
-			    container = this._container = L.DomUtil.create('div', className);
+			    container = this._container = L.DomUtil.create('div', className),
+			    collapsed = this.options.collapsed;
 
 			// makes this work on IE touch devices by stopping it from firing a mouseout event when the touch is released
 			container.setAttribute('aria-haspopup', true);
@@ -24901,11 +24979,15 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 			var form = this._form = L.DomUtil.create('form', className + '-list');
 
-			if (!L.Browser.android) {
-				L.DomEvent.on(container, {
-					mouseenter: this.expand,
-					mouseleave: this.collapse
-				}, this);
+			if (collapsed) {
+				this._map.on('click', this.collapse, this);
+
+				if (!L.Browser.android) {
+					L.DomEvent.on(container, {
+						mouseenter: this.expand,
+						mouseleave: this.collapse
+					}, this);
+				}
 			}
 
 			var link = this._layersLink = L.DomUtil.create('a', className + '-toggle', container);
@@ -24925,10 +25007,9 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 				setTimeout(L.bind(this._onInputClick, this), 0);
 			}, this);
 
-			this._map.on('click', this.collapse, this);
 			// TODO keyboard accessibility
 
-			if (!this.options.collapsed) {
+			if (!collapsed) {
 				this.expand();
 			}
 
@@ -29625,7 +29706,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	  this.highWaterMark = hwm || hwm === 0 ? hwm : defaultHwm;
 
 	  // cast to ints.
-	  this.highWaterMark = ~ ~this.highWaterMark;
+	  this.highWaterMark = ~~this.highWaterMark;
 
 	  // A linked list is used to store data chunks instead of an array because the
 	  // linked list can remove elements from the beginning faster than
@@ -31031,7 +31112,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	  this.highWaterMark = hwm || hwm === 0 ? hwm : defaultHwm;
 
 	  // cast to ints.
-	  this.highWaterMark = ~ ~this.highWaterMark;
+	  this.highWaterMark = ~~this.highWaterMark;
 
 	  // drain event flag.
 	  this.needDrain = false;
@@ -31186,20 +31267,16 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	  processNextTick(cb, er);
 	}
 
-	// If we get something that is not a buffer, string, null, or undefined,
-	// and we're not in objectMode, then that's an error.
-	// Otherwise stream chunks are all considered to be of length=1, and the
-	// watermarks determine how many objects to keep in the buffer, rather than
-	// how many bytes or characters.
+	// Checks that a user-supplied chunk is valid, especially for the particular
+	// mode the stream is in. Currently this means that `null` is never accepted
+	// and undefined/non-string values are only allowed in object mode.
 	function validChunk(stream, state, chunk, cb) {
 	  var valid = true;
 	  var er = false;
-	  // Always throw error if a null is written
-	  // if we are not in object mode then throw
-	  // if it is not a buffer, string, or undefined.
+
 	  if (chunk === null) {
 	    er = new TypeError('May not write null values to stream');
-	  } else if (!Buffer.isBuffer(chunk) && typeof chunk !== 'string' && chunk !== undefined && !state.objectMode) {
+	  } else if (typeof chunk !== 'string' && chunk !== undefined && !state.objectMode) {
 	    er = new TypeError('Invalid non-string/buffer chunk');
 	  }
 	  if (er) {
@@ -31213,19 +31290,20 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	Writable.prototype.write = function (chunk, encoding, cb) {
 	  var state = this._writableState;
 	  var ret = false;
+	  var isBuf = Buffer.isBuffer(chunk);
 
 	  if (typeof encoding === 'function') {
 	    cb = encoding;
 	    encoding = null;
 	  }
 
-	  if (Buffer.isBuffer(chunk)) encoding = 'buffer';else if (!encoding) encoding = state.defaultEncoding;
+	  if (isBuf) encoding = 'buffer';else if (!encoding) encoding = state.defaultEncoding;
 
 	  if (typeof cb !== 'function') cb = nop;
 
-	  if (state.ended) writeAfterEnd(this, cb);else if (validChunk(this, state, chunk, cb)) {
+	  if (state.ended) writeAfterEnd(this, cb);else if (isBuf || validChunk(this, state, chunk, cb)) {
 	    state.pendingcb++;
-	    ret = writeOrBuffer(this, state, chunk, encoding, cb);
+	    ret = writeOrBuffer(this, state, isBuf, chunk, encoding, cb);
 	  }
 
 	  return ret;
@@ -31265,10 +31343,11 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	// if we're already writing something, then just put this
 	// in the queue, and wait our turn.  Otherwise, call _write
 	// If we return false, then we need a drain event, so set that flag.
-	function writeOrBuffer(stream, state, chunk, encoding, cb) {
-	  chunk = decodeChunk(state, chunk, encoding);
-
-	  if (Buffer.isBuffer(chunk)) encoding = 'buffer';
+	function writeOrBuffer(stream, state, isBuf, chunk, encoding, cb) {
+	  if (!isBuf) {
+	    chunk = decodeChunk(state, chunk, encoding);
+	    if (Buffer.isBuffer(chunk)) encoding = 'buffer';
+	  }
 	  var len = state.objectMode ? 1 : chunk.length;
 
 	  state.length += len;
@@ -31337,8 +31416,8 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	      asyncWrite(afterWrite, stream, state, finished, cb);
 	      /*</replacement>*/
 	    } else {
-	        afterWrite(stream, state, finished, cb);
-	      }
+	      afterWrite(stream, state, finished, cb);
+	    }
 	  }
 	}
 
@@ -31489,7 +31568,6 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 
 	  this.next = null;
 	  this.entry = null;
-
 	  this.finish = function (err) {
 	    var entry = _this.entry;
 	    _this.entry = null;
@@ -32981,7 +33059,7 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	function getThen(obj) {
 	  // Make sure we only access the accessor once as required by the spec
 	  var then = obj && obj.then;
-	  if (obj && typeof obj === 'object' && typeof then === 'function') {
+	  if (obj && (typeof obj === 'object' || typeof obj === 'function') && typeof then === 'function') {
 	    return function appyThen() {
 	      then.apply(obj, arguments);
 	    };
@@ -43534,12 +43612,11 @@ define(["vizapi/SplunkVisualizationBase","vizapi/SplunkVisualizationUtils"], fun
 	            }
 
 	            if(options.iconColor) {
-	                //if(options.iconColor === 'white' || options.iconColor === 'black') {
-	                //    iconColorClass = "icon-" + options.iconColor;
-	                //} else {
-	                //    iconColorStyle = "style='color: " + options.iconColor + "' ";
-	                //}
-	                iconColorStyle = "style='color: " + options.iconColor + "' ";
+	                if(options.iconColor === 'white' || options.iconColor === 'black') {
+	                    iconColorClass = "icon-" + options.iconColor;
+	                } else {
+	                    iconColorStyle = "style='color: " + options.iconColor + "' ";
+	                }
 	            }
 
 	            return "<i " + iconColorStyle + "class='" + options.extraClasses + " " + options.prefix + " " + iconClass + " " + iconSpinClass + " " + iconColorClass + "'></i>";
