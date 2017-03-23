@@ -20,6 +20,14 @@ module.exports = {
             },
         ]
     },
+    module: {
+        loaders: [
+            {
+                test: /Leaflet\.Coordinates-0\.1\.5\.src\.js$/,
+                loader: 'imports-loader?L=leaflet'
+            },
+        ]
+    },
     externals: [
         'vizapi/SplunkVisualizationBase',
         'vizapi/SplunkVisualizationUtils'
