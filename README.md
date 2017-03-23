@@ -24,7 +24,7 @@ This app only works with **Splunk 6.4+** as it relies on the new [Custom Visuali
 
 # Usage
 ### Fields must be named exactly as labled here. The app is keyed off of field names and not field order.
-`base_search | table _time, coordinates, description [ title | icon | markerColor | iconColor | prefix | extraClasses | maxAge | pathWeight | pathOpacity]`
+`base_search | table coordinates, description [ title | icon | markerColor | iconColor | prefix | extraClasses | maxAge | pathWeight | pathOpacity]`
 
 # Required Fields
 
