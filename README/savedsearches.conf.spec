@@ -17,3 +17,4 @@ display.visualizations.custom.custom-image-map-viz.map_viz.kmlOverlay = <string>
 display.visualizations.custom.custom-image-map-viz.map_viz.showPath = <string> 
 display.visualizations.custom.custom-image-map-viz.map_viz.focusClicked= <string>
 display.visualizations.custom.custom-image-map-viz.map_viz.unfocusedOpacity = <int> 
+display.visualizations.custom.custom-image-map-viz.map_viz.showPointerCoordinates = <int>
