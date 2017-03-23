@@ -1,12 +1,13 @@
 # Splunk Custom Visualization
 
 # Synopsis
-Custom visualization to map x,y coordinates in pixels on a flat image using Leaflet Maps.
+Custom image map visualization to plot x,y coordinates in pixels on a flat image using Leaflet Maps.
 
 # Credits
 ### Included Open Source Software
 ##### [Leaflet Maps](http://leafletjs.com/)
 ##### [Leaflet Awesome Markers Plugin](https://www.npmjs.com/package/drmonty-leaflet-awesome-markers)
+##### [Leaflet.Coordinates Plugin](https://github.com/MrMufflon/Leaflet.Coordinates)
 ##### [togeojson](https://github.com/mapbox/togeojson)
 ##### [JSZip](https://stuk.github.io/jszip/)
 ##### [JSZipUtils](http://stuk.github.io/jszip-utils/)
@@ -26,8 +27,6 @@ This app only works with **Splunk 6.4+** as it relies on the new [Custom Visuali
 `base_search | table _time, coordinates, description [ title | icon | markerColor | iconColor | prefix | extraClasses | maxAge | pathWeight | pathOpacity]`
 
 # Required Fields
-##### _time
-Splunk time field.
 
 ##### coordinates
 comma separated field of coordinates in y,x format. If coordinate fields are named `x` and `y` use eval to combine; `| eval coordinates=y.",".x`
@@ -120,6 +119,8 @@ Enable or disable scroll wheel zoom.
 Enable or disable full screen mode. Map takes up all available space in browser and adjust to resize. - **Requires browser Refresh**
 ###### Drilldown
 Enable or disable drilldown. Double click a marker to activate drilldown. - **Requires browser Refresh**
+###### Pointer Coordinates
+Enable or disable display pane showing x,y coordinates of mouse pointer within image.
 ###### Default Height
 Initial Height Of Map (Default: 600)
 ###### Map Zoom
