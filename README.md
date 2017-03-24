@@ -3,6 +3,8 @@
 # Synopsis
 Custom image map visualization to plot x,y coordinates in pixels on a flat image using Leaflet Maps.
 
+Have you ever wanted to map people in a building or retail space and trace their path across the store? Are you looking to plot gaming data on a custom game map? If you have an image, data and can convert or specify coordinates in x,y, use this custom visualization!
+
 # Credits
 ### Included Open Source Software
 ##### [Leaflet Maps](http://leafletjs.com/)
