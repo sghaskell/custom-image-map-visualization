@@ -30,6 +30,7 @@ define([
 			'display.visualizations.custom.custom-image-map-viz.map_viz.fullScreen': 0,
 			'display.visualizations.custom.custom-image-map-viz.map_viz.drilldown': 0,
 			'display.visualizations.custom.custom-image-map-viz.map_viz.defaultHeight': 600,
+			'display.visualizations.custom.custom-image-map-viz.map_viz.backgroundColor': "#ddd",
 			'display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterZoom': 0,
 			'display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterX': 0,
 			'display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterY': 0,
@@ -322,6 +323,7 @@ define([
 				fullScreen = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.fullScreen']),
 				drilldown = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.drilldown']),
 				defaultHeight = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.defaultHeight']),
+				backgroundColor = config['display.visualizations.custom.custom-image-map-viz.map_viz.backgroundColor'],
 				mapCenterZoom = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterZoom']),
 				mapCenterX = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterX']),
 				mapCenterY = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterY']),
@@ -335,6 +337,9 @@ define([
 
 			this.checkNan(mapHeight, "Map Height");
 			this.checkNan(mapWidth, "Map Width");
+
+            // Set background color on leaflet container
+            $(".leaflet-container").css("background", backgroundColor);
 
 			// Initialize the DOM
 			if (!this.isInitializedDom) {

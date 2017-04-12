@@ -8,6 +8,7 @@ display.visualizations.custom.custom-image-map-viz.map_viz.scrollWheelZoom = <st
 display.visualizations.custom.custom-image-map-viz.map_viz.fullScreen = <string>
 display.visualizations.custom.custom-image-map-viz.map_viz.drilldown = <string>
 display.visualizations.custom.custom-image-map-viz.map_viz.defaultHeight = <int>
+display.visualizations.custom.custom-image-map-viz.map_viz.backgroundColor = <string>
 display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterZoom = <int>
 display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterX = <int>
 display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterY = <int>
