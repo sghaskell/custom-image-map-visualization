@@ -1,6 +1,6 @@
 {
   "name": "custom-image-map-viz",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Map points on a flat image using xy coordinates.",
   "main": "visualization.js",
   "scripts": {
