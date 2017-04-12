@@ -151,6 +151,8 @@ Enable or disable drilldown. Double click a marker to activate drilldown. - **Re
 Enable or disable display pane showing x,y coordinates of mouse pointer within image.
 ###### Default Height
 Initial Height Of Map (Default: 600)
+###### Background Color
+Background color of container for images that don't fill the entire panel (Default: #ddd)
 ###### Map Zoom
 Initial Zoom for map (Default: 0)
 ###### Center X
