@@ -29,7 +29,7 @@ module.exports = {
         ]
     },
     externals: [
-        'vizapi/SplunkVisualizationBase',
-        'vizapi/SplunkVisualizationUtils'
+        'api/SplunkVisualizationBase',
+        'api/SplunkVisualizationUtils'
     ]
 };

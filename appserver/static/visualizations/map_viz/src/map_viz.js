@@ -5,9 +5,10 @@ define([
 			'togeojson',
 			'jszip',
 			'jszip-utils',
-			'vizapi/SplunkVisualizationBase',
-			'vizapi/SplunkVisualizationUtils',
+			'api/SplunkVisualizationBase',
+			'api/SplunkVisualizationUtils',
 			'drmonty-leaflet-awesome-markers',
+            'leaflet.heat',
 			'../contrib/Leaflet.Coordinates-0.1.5.src'
 		],
 		function(
@@ -39,12 +40,30 @@ define([
 			'display.visualizations.custom.custom-image-map-viz.map_viz.showPath': 1,
 			'display.visualizations.custom.custom-image-map-viz.map_viz.focusClicked': 1,
 			'display.visualizations.custom.custom-image-map-viz.map_viz.unfocusedOpacity': 0.1,
-			'display.visualizations.custom.custom-image-map-viz.map_viz.showPointerCoordinates': 0
+			'display.visualizations.custom.custom-image-map-viz.map_viz.showPointerCoordinates': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.heatmapEnable': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.heatmapOnly': 0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.heatmapMinOpacity': 1.0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.heatmapMaxZoom': null, 
+            'display.visualizations.custom.custom-image-map-viz.map_viz.heatmapMaxPointIntensity': 1.0,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.heatmapRadius': 25,
+            'display.visualizations.custom.custom-image-map-viz.map_viz.heatmapBlur': 15,
+            //'display.visualizations.custom.custom-image-map-viz.map_viz.heatmapColorGradient': {.4:"blue",.6:"cyan",.7:"lime",.8:"yellow",1:"red"} 
 		},
 		peeps: {},
 		iconColors: [],
 		clickedPeeps: [],
 		isFocused: false,
+
+        _getEscapedProperty: function(name, config) {
+            var propertyValue = config[this.getPropertyNamespaceInfo().propertyNamespace + name];
+            return SplunkVisualizationUtils.escapeHtml(propertyValue);
+        },
+
+        _getProperty: function(name, config) {
+            var propertyValue = config[this.getPropertyNamespaceInfo().propertyNamespace + name];
+            return propertyValue;
+        },
 
 		// Peep object used to represent a user on the map
 		peep: function(description,
@@ -306,37 +325,46 @@ define([
 				return this;
 			}
 
-			// Validate we have at least latitude and longitude fields
-			if(!("coordinates" in dataRows[0]) || !("description" in dataRows[0])) {
-				 throw new SplunkVisualizationBase.VisualizationError(
-					'Incorrect Fields Detected - description & coordinates fields required'
-				);
-			}
 
 			// get configs
-			var mapImage = SplunkVisualizationUtils.makeSafeUrl(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapImage']),
-				mapHeight = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapHeight']),
-				mapWidth = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapWidth']),
-				allPopups	= parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.allPopups']),
-				multiplePopups = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.multiplePopups']),
-				scrollWheelZoom = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.scrollWheelZoom']),
-				fullScreen = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.fullScreen']),
-				drilldown = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.drilldown']),
-				defaultHeight = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.defaultHeight']),
-				backgroundColor = config['display.visualizations.custom.custom-image-map-viz.map_viz.backgroundColor'],
-				mapCenterZoom = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterZoom']),
-				mapCenterX = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterX']),
-				mapCenterY = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterY']),
-				minZoom		= parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.minZoom']),
-				maxZoom		= parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.maxZoom']),
-				kmlOverlay	= config['display.visualizations.custom.custom-image-map-viz.map_viz.kmlOverlay'],
-				showPath = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.showPath'])
-				focusClicked = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.focusClicked'])
-				unfocusedOpacity = parseFloat(config['display.visualizations.custom.custom-image-map-viz.map_viz.unfocusedOpacity'])
-				showPointerCoordinates = parseInt(config['display.visualizations.custom.custom-image-map-viz.map_viz.showPointerCoordinates'])
+			var mapImage = SplunkVisualizationUtils.makeSafeUrl(this._getEscapedProperty('mapImage', config)),
+				mapHeight = parseInt(this._getEscapedProperty('mapHeight', config)),
+				mapWidth = parseInt(this._getEscapedProperty('mapWidth', config)),
+				allPopups	= parseInt(this._getEscapedProperty('allPopups', config)),
+				multiplePopups = parseInt(this._getEscapedProperty('multiplePopups', config)),
+				scrollWheelZoom = parseInt(this._getEscapedProperty('scrollWheelZoom', config)),
+				fullScreen = parseInt(this._getEscapedProperty('fullScreen', config)),
+				drilldown = parseInt(this._getEscapedProperty('drilldown', config)),
+				defaultHeight = parseInt(this._getEscapedProperty('defaultHeight', config)),
+				backgroundColor = this._getEscapedProperty('backgroundColor', config),
+				mapCenterZoom = parseInt(this._getEscapedProperty('mapCenterZoom', config)),
+				mapCenterX = parseFloat(this._getEscapedProperty('mapCenterX', config)),
+				mapCenterY = parseFloat(this._getEscapedProperty('mapCenterY', config)),
+				minZoom		= parseInt(this._getEscapedProperty('minZoom', config)),
+				maxZoom		= parseInt(this._getEscapedProperty('maxZoom', config)),
+				kmlOverlay	= this._getEscapedProperty('kmlOverlay', config),
+				showPath = parseInt(this._getEscapedProperty('showPath', config))
+				focusClicked = parseInt(this._getEscapedProperty('focusClicked', config))
+				unfocusedOpacity = parseFloat(this._getEscapedProperty('unfocusedOpacity', config))
+				showPointerCoordinates = parseInt(this._getEscapedProperty('showPointerCoordinates', config))
+                heatmapEnable = parseInt(this._getEscapedProperty('heatmapEnable', config))
+                heatmapOnly = parseInt(this._getEscapedProperty('heatmapOnly', config))
+                heatmapMinOpacity = parseFloat(this._getEscapedProperty('heatmapMinOpacity', config)),
+                heatmapMaxZoom = parseInt(this._getEscapedProperty('heatmapMaxZoom', config)) 
+                heatmapMaxPointIntensity = parseFloat(this._getEscapedProperty('heatmapMaxPointIntensity', config)),
+                heatmapRadius = parseInt(this._getEscapedProperty('heatmapRadius', config)) 
+                heatmapBlur = parseInt(this._getEscapedProperty('heatmapBlur', config)) 
+                //heatmapColorGradient = this._getProperty('heatmapColorGradient', config)
 
 			this.checkNan(mapHeight, "Map Height");
 			this.checkNan(mapWidth, "Map Width");
+
+			// Validate we have at least latitude and longitude fields
+            if(!("coordinates" in dataRows[0]) || !("description" in dataRows[0])) {
+                 throw new SplunkVisualizationBase.VisualizationError(
+                    'Incorrect Fields Detected - description & coordinates fields required'
+                );
+            }
 
             // Set background color on leaflet container
             $(".leaflet-container").css("background", backgroundColor);
@@ -443,7 +471,16 @@ define([
 						this.fetchKmlAndMap(url, file, this.map);
 					}, this);
 				}
-			   
+			 
+                // Heatmap
+                if (this.isArgTrue(heatmapEnable)) {
+                    this.heat = L.heatLayer([], {minOpacity: heatmapMinOpacity,
+                                                 maxZoom: heatmapMaxZoom,
+                                                 max: heatmapMaxPointIntensity,
+                                                 radius: heatmapRadius,
+                                                 blur: heatmapBlur}).addTo(this.map);
+                }
+ 
 				// Init defaults
 				this.chunk = 50000;
 				this.offset = 0;
@@ -456,7 +493,8 @@ define([
 				// Coordinates expected as single value Splunk field y,x
 				var coordinates = userData["coordinates"].split(/,/).map(parseFloat);
 				var latlng = L.latLng(coordinates);
-				var description = userData["description"];
+				//var description = userData["description"];
+				var description = (_.has(userData, "description")) ? userData["description"]:"";
 				var lastSeen = (_.has(userData, "_time")) ? userData["_time"]:new Date();
 				var maxAge = (_.has(userData, "maxAge")) ? userData["maxAge"]*1000:null;
 				var pathWeight = (_.has(userData, "pathWeight")) ? userData["pathWeight"]:5;
@@ -475,7 +513,7 @@ define([
 					this.peeps[description].lastSeen= lastSeen;
 				} else {
 					// Create a new peep
-					console.log("creating " + description);
+					//console.log("creating " + description);
 					var thisPeep = new this.peep(description,
 												 latlng,
 												 lastSeen,
@@ -496,6 +534,7 @@ define([
 						var drilldownFields = this.validateFields(userData);
 						thisPeep.drilldownFields = drilldownFields;
 					}
+
 					this.peeps[description] = thisPeep;
 				}
 			}, this);			 
@@ -514,14 +553,33 @@ define([
 				// marker exists, update with latest position
 				if(peep.marker) {
 					peep.marker.setLatLng(peep.currentPos).update();
+
+                    if (this.isArgTrue(heatmapEnable)) {
+                        this.heat.addLatLng(peep.currentPos);
+                    }
 				} else {
 					// Add peeps marker to its layer group and stick on the map
-					peep.layerGroup.addTo(this.map);
+                    if(!this.isArgTrue(heatmapOnly)) {
+    			        peep.layerGroup.addTo(this.map);
+                    }
+
 					if(this.isArgTrue(allPopups)) {
 						peep.marker = L.marker(peep.currentPos, {icon: peep.markerIcon, title: peep.title}).bindPopup(peep.description).openPopup();
 					} else {
 						peep.marker = L.marker(peep.currentPos, {icon: peep.markerIcon, title: peep.title}).bindPopup(peep.description);
 					}
+                    //console.log(peep.currentPos);
+                    
+                    if (this.isArgTrue(heatmapEnable)) {
+			            _.each(peep.coordinates, function(c, i) {
+                            this.heat.addLatLng(c);
+			            }, this);			 
+                        
+                        if(this.isArgTrue(heatmapOnly)) {
+                            return;
+                        }
+                    }
+
 					peep.marker.addTo(peep.layerGroup);
 
 					if(this.isArgTrue(focusClicked)) {
@@ -563,6 +621,8 @@ define([
 			}, this);
 			// END PROCESSING DATA
 
+            console.log(this.heat);
+            console.log(this.peepcount);
 			// Chunk through data 50k results at a time
 			if(dataRows.length === this.chunk) {
 				this.offset += this.chunk;

@@ -1,173 +1,155 @@
 <form class="splunk-formatter-section" section-label="Map">
-    <div class="control-group">
-        <label class="control-label">Map Image</label>
-        <div class="controls controls-block">
-            <splunk-text-input name="display.visualizations.custom.custom-image-map-viz.map_viz.mapImage"></splunk-text-input>
-            <span class="help-block ">Specify map image located in contrib/images directory</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Map Height</label>
-        <div class="controls controls-block">
-            <splunk-text-input name="display.visualizations.custom.custom-image-map-viz.map_viz.mapHeight"></splunk-text-input>
-            <span class="help-block ">Specify image height in pixels.</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Map Width</label>
-        <div class="controls controls-block">
-            <splunk-text-input name="display.visualizations.custom.custom-image-map-viz.map_viz.mapWidth"></splunk-text-input>
-            <span class="help-block ">Specify image width in pixels.</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Scroll Wheel Zoom</label>
-        <div class="controls controls-fill ">
-            <splunk-radio-input name="display.visualizations.custom.custom-image-map-viz.map_viz.scrollWheelZoom" value="0">
-                <option value="1">Enabled</option>
-                <option value="0">Disabled</option>
-            </splunk-radio-input>
-            <span class="help-block ">Enable or disable zooming on map with scroll wheel</span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Full Screen Mode</label>
-        <div class="controls controls-fill ">
-            <splunk-radio-input name="display.visualizations.custom.custom-image-map-viz.map_viz.fullScreen" value="0">
-                <option value="1">Enabled</option>
-                <option value="0">Disabled</option>
-            </splunk-radio-input>
-            <span class="help-block ">Enable or disable full screen mode. Map takes up all available space in browser and adjust to resize.</span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Drilldown</label>
-        <div class="controls controls-fill ">
-            <splunk-radio-input name="display.visualizations.custom.custom-image-map-viz.map_viz.drilldown" value="0">
-                <option value="1">Enabled</option>
-                <option value="0">Disabled</option>
-            </splunk-radio-input>
-            <span class="help-block ">Enable or disable drilldown behavior for markers. Double-click marker to drilldown</span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Pointer Coordinates</label>
-        <div class="controls controls-fill ">
-            <splunk-radio-input name="display.visualizations.custom.custom-image-map-viz.map_viz.showPointerCoordinates" value="0">
-                <option value="1">Enabled</option>
-                <option value="0">Disabled</option>
-            </splunk-radio-input>
-            <span class="help-block ">Enable or disable display pane showing x,y coordinates of mouse pointer within image.</span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Default Height</label>
-        <div class="controls controls-block">
-            <splunk-text-input name="display.visualizations.custom.custom-image-map-viz.map_viz.defaultHeight" value="600"></splunk-text-input>
-            <span class="help-block ">Initial Height Of Map (Default: 600) </span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Background Color</label>
-        <div class="controls controls-block">
-            <splunk-color-picker name="display.visualizations.custom.custom-image-map-viz.map_viz.backgroundColor" value="#ddd">
-            </splunk-color-picker>
-            <span class="help-block ">Background color of container for images that don't fill the entire panel (Default: #ddd)</span>
-        </div>
-    </div>
+    <splunk-control-group label="Map Image">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.mapImage"></splunk-text-input>
+        <span class="help-block ">Specify map image located in contrib/images directory</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Map Height">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.mapHeight"></splunk-text-input>
+        <span class="help-block ">Specify image height in pixels.</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Map Width">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.mapWidth"></splunk-text-input>
+        <span class="help-block ">Specify image width in pixels.</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Scroll Wheel Zoom">
+        <splunk-radio-input name="{{VIZ_NAMESPACE}}.scrollWheelZoom" value="0">
+            <option value="1">Enabled</option>
+            <option value="0">Disabled</option>
+        </splunk-radio-input>
+        <span class="help-block ">Enable or disable zooming on map with scroll wheel</span>
+    </splunk-control-group>
+    <splunk-control-group label="Full Screen Mode">
+        <splunk-radio-input name="{{VIZ_NAMESPACE}}.fullScreen" value="0">
+            <option value="1">Enabled</option>
+            <option value="0">Disabled</option>
+        </splunk-radio-input>
+        <span class="help-block ">Enable or disable full screen mode. Map takes up all available space in browser and adjust to resize.</span>
+    </splunk-control-group>
+    <splunk-control-group label="Drilldown">
+        <splunk-radio-input name="{{VIZ_NAMESPACE}}.drilldown" value="0">
+            <option value="1">Enabled</option>
+            <option value="0">Disabled</option>
+        </splunk-radio-input>
+        <span class="help-block ">Enable or disable drilldown behavior for markers. Double-click marker to drilldown</span>
+    </splunk-control-group>
+    <splunk-control-group label="Pointer Coordinates">
+        <splunk-radio-input name="{{VIZ_NAMESPACE}}.showPointerCoordinates" value="0">
+            <option value="1">Enabled</option>
+            <option value="0">Disabled</option>
+        </splunk-radio-input>
+        <span class="help-block ">Enable or disable display pane showing x,y coordinates of mouse pointer within image.</span>
+    </splunk-control-group>
+    <splunk-control-group label="Default Height">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.defaultHeight" value="600"></splunk-text-input>
+        <span class="help-block ">Initial Height Of Map (Default: 600) </span> 
+    </splunk-control-group>
+    <splunk-control-group label="Background Color">
+        <splunk-color-picker name="{{VIZ_NAMESPACE}}.backgroundColor" value="#ddd">
+        </splunk-color-picker>
+        <span class="help-block ">Background color of container for images that don't fill the entire panel (Default: #ddd)</span>
+    </splunk-control-group>
 </form>
 <form class="splunk-formatter-section" section-label="Map (Continued)">
-    <div class="control-group">
-        <label class="control-label">Map Zoom</label>
-        <div class="controls controls-block">
-            <splunk-text-input name="display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterZoom" value="0"></splunk-text-input>
-            <span class="help-block ">Initial Zoom for map (Default: 0)</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Center X</label>
-        <div class="controls controls-block">
-            <splunk-text-input name="display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterX" value="0"></splunk-text-input>
-            <span class="help-block ">Initial Center Latitiude (Default: 0)</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Center Y</label>
-        <div class="controls controls-block">
-            <splunk-text-input name="display.visualizations.custom.custom-image-map-viz.map_viz.mapCenterY" value="0"></splunk-text-input>
-            <span class="help-block ">Initial Center Longitude (Default: 0)</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Min Zoom</label>
-        <div class="controls controls-block">
-            <splunk-text-input class="input-medium" name="display.visualizations.custom.custom-image-map-viz.map_viz.minZoom" value="0"></splunk-text-input>
-            <span class="help-block ">Minimum zoom for tile layer. Does not affect map zoom. (Default: 0)</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Max Zoom</label>
-        <div class="controls controls-block">
-            <splunk-text-input class="input-medium" name="display.visualizations.custom.custom-image-map-viz.map_viz.maxZoom" value="0"></splunk-text-input>
-            <span class="help-block ">Maximum zoom for tile layer. Does not affect map zoom. (Default: 0)</span> 
-        </div>
-    </div>
+    <splunk-control-group label="Map Zoom">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.mapCenterZoom" value="0"></splunk-text-input>
+        <span class="help-block ">Initial Zoom for map (Default: 0)</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Center X">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.mapCenterX" value="0"></splunk-text-input>
+        <span class="help-block ">Initial Center Latitiude (Default: 0)</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Center Y">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.mapCenterY" value="0"></splunk-text-input>
+        <span class="help-block ">Initial Center Longitude (Default: 0)</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Min Zoom">
+        <splunk-text-input class="input-medium" name="{{VIZ_NAMESPACE}}.minZoom" value="0"></splunk-text-input>
+        <span class="help-block ">Minimum zoom for tile layer. Does not affect map zoom. (Default: 0)</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Max Zoom">
+        <splunk-text-input class="input-medium" name="{{VIZ_NAMESPACE}}.maxZoom" value="0"></splunk-text-input>
+        <span class="help-block ">Maximum zoom for tile layer. Does not affect map zoom. (Default: 0)</span> 
+    </splunk-control-group>
 </form>
 <form class="splunk-formatter-section" section-label="Markers">
-    <div class="control-group">
-        <label class="control-label">Show Path</label>
-        <div class="controls controls-fill ">
-            <splunk-radio-input name="display.visualizations.custom.custom-image-map-viz.map_viz.showPath" value="1">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </splunk-radio-input> 
-            <span class="help-block ">Display path of marker using all coordinates within the search window.</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Show All Popups</label>
-        <div class="controls controls-fill ">
-            <splunk-radio-input name="display.visualizations.custom.custom-image-map-viz.map_viz.allPopups" value="0">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </splunk-radio-input> 
-            <span class="help-block ">Display all popups on page load. Only works with clustering disabled.</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Allow Multiple Popups</label>
-        <div class="controls controls-fill ">
-            <splunk-radio-input name="display.visualizations.custom.custom-image-map-viz.map_viz.multiplePopups" value="0">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </splunk-radio-input> 
-            <span class="help-block ">Allow multiple popups to dispaly on screen without closing previous. Will disappear at higher zoom levels with clustering enabled. Enabled by default when showing all popups.</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Focus Clicked</label>
-        <div class="controls controls-fill ">
-            <splunk-radio-input name="display.visualizations.custom.custom-image-map-viz.map_viz.focusClicked" value="1">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </splunk-radio-input> 
-            <span class="help-block ">Clicked markers and paths will gain focus by dimming unclicked markers and paths.</span> 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Unfocused Opacity</label>
-        <div class="controls controls-block">
-            <splunk-text-input name="display.visualizations.custom.custom-image-map-viz.map_viz.unfocusedOpacity" value="0.1"></splunk-text-input>
-            <span class="help-block ">Opacity of markers and paths that are unfocused. Floating point number between 0 (hidden) and 1 (solid) - (Default: 0.1)</span> 
-        </div>
-    </div>
+    <splunk-control-group label="Show Path">
+        <splunk-radio-input name="{{VIZ_NAMESPACE}}.showPath" value="1">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </splunk-radio-input> 
+        <span class="help-block ">Display path of marker using all coordinates within the search window.</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Show All Popups">
+        <splunk-radio-input name="{{VIZ_NAMESPACE}}.allPopups" value="0">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </splunk-radio-input> 
+        <span class="help-block ">Display all popups on page load. Only works with clustering disabled.</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Allow Multiple Popups">
+        <splunk-radio-input name="{{VIZ_NAMESPACE}}.multiplePopups" value="0">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </splunk-radio-input> 
+        <span class="help-block ">Allow multiple popups to dispaly on screen without closing previous. Will disappear at higher zoom levels with clustering enabled. Enabled by default when showing all popups.</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Focus Clicked">
+        <splunk-radio-input name="{{VIZ_NAMESPACE}}.focusClicked" value="1">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </splunk-radio-input> 
+        <span class="help-block ">Clicked markers and paths will gain focus by dimming unclicked markers and paths.</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Unfocused Opacity">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.unfocusedOpacity" value="0.1"></splunk-text-input>
+        <span class="help-block ">Opacity of markers and paths that are unfocused. Floating point number between 0 (hidden) and 1 (solid) - (Default: 0.1)</span> 
+    </splunk-control-group>
 </form>
 <form class="splunk-formatter-section" section-label="Overlays">
-    <div class="control-group">
-        <label class="control-label">KML/KMZ Overlay</label>
-        <div class="controls controls-block">
-            <splunk-text-input name="display.visualizations.custom.custom-image-map-viz.map_viz.kmlOverlay"></splunk-text-input>
-            <span class="help-block ">Comma separated list of KML or KMZ file names copied into kml directory of app (file1.kml, file2.kml)</span> 
-        </div>
-    </div>
+    <splunk-control-group label="KML/KMZ Overlay">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.kmlOverlay"></splunk-text-input>
+        <span class="help-block ">Comma separated list of KML or KMZ file names copied into kml directory of app (file1.kml, file2.kml)</span> 
+    </splunk-control-group>
+</form>
+<form class="splunk-formatter-section" section-label="Heatmap">
+    <splunk-control-group label="Enable Heatmap">
+        <splunk-radio-input name="{{VIZ_NAMESPACE}}.heatmapEnable" value="0">
+            <option value="1">Enabled</option>
+            <option value="0">Disabled</option>
+        </splunk-radio-input>
+        <span class="help-block ">Enable or disable heatmap.</span>
+    </splunk-control-group>
+    <splunk-control-group label="Heatmap Only">
+        <splunk-radio-input name="{{VIZ_NAMESPACE}}.heatmapOnly" value="0">
+            <option value="1">Enabled</option>
+            <option value="0">Disabled</option>
+        </splunk-radio-input>
+        <span class="help-block ">Only show the heatmap. No markers will be rendered.</span>
+    </splunk-control-group>
+    <splunk-control-group label="Min Opacity">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.heatmapMinOpacity" value="1.0"></splunk-text-input>
+        <span class="help-block ">Minimum opacity the heat will start at. (Default: 1.0)</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Max Zoom">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.heatmapMaxZoom" value="0"></splunk-text-input>
+        <span class="help-block ">Zoom level where the points reach maximum intensity. (Default: Max Zoom of map)</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Max Point Intensity">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.heatmapMaxPointIntensity" value="1.0"></splunk-text-input>
+        <span class="help-block ">Max point intensity. (Default: 1.0)</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Radius">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.heatmapRadius" value="25"></splunk-text-input>
+        <span class="help-block ">Radius of each point of heatmap. (Default: 25)</span> 
+    </splunk-control-group>
+    <splunk-control-group label="Blur">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.heatmapBlur" value="15"></splunk-text-input>
+        <span class="help-block ">Amount of blur. (Default: 15)</span> 
+    </splunk-control-group>
+    <!--
+    <splunk-control-group label="Color Gradient">
+        <splunk-text-input name="{{VIZ_NAMESPACE}}.heatmapColorGradient" value="{.4:'blue',.6:'cyan',.7:'lime',.8:'yellow',1:'red'}"></splunk-text-input>
+        <span class="help-block ">Color gradient - {0.4: 'blue', 0.65: 'lime', 1: 'red'} (Default: {.4:"blue",.6:"cyan",.7:"lime",.8:"yellow",1:"red"})</span> 
+    </splunk-control-group>
+    -->
 </form>

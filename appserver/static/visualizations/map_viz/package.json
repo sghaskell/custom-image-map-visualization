@@ -23,6 +23,7 @@
     "jszip": "^3.1.2",
     "jszip-utils": "0.0.2",
     "transform-loader": "^0.2.3",
-    "brfs": "^1.4.3"
+    "brfs": "^1.4.3",
+    "leaflet.heat":"^0.2.0"
   }
 }
