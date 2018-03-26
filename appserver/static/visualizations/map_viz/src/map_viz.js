@@ -418,7 +418,7 @@ define([
 				// dimensions of the image
 				var w = mapWidth;
 				var h = mapHeight;
-				
+
 				// Set bounds and create image overlay
 				var bounds = [[0,w], [h,0]];
 				var overlay = L.imageOverlay(activeImage, bounds);
@@ -441,24 +441,35 @@ define([
 					}).addTo(this.map);
 				}
 
-				// Get parent element of div to resize
-				var parentEl = $(this.el).parent().parent().closest("div").attr("data-cid");
 
-				// Map Full Screen Mode
-				if (this.isArgTrue(fullScreen)) {
-					var vh = $(window).height() - 120;
-					$("div[data-cid=" + parentEl + "]").css("height", vh);
+				// Get map size          
+				var mapSize = this.mapSize = this.map.getSize();
 
-					$(window).resize(function() {
-						var vh = $(window).height() - 120;
-						$("div[data-cid=" + parentEl + "]").css("height", vh);
-					});
-					this.map.invalidateSize();
-				} else {
-					$("div[data-cid=" + parentEl + "]").css("height", defaultHeight);
-					this.map.invalidateSize();
-				}
+                // Get parent element of div to resize 
+                // Nesting of Div's is different, try 7.x first
+                var parentEl = $(this.el).parent().parent().parent().parent().parent().closest("div").attr("data-cid");
+                var parentView = $(this.el).parent().parent().parent().parent().parent().closest("div").attr("data-view");
 
+                // Default to 6.x view
+                if(parentView != 'views/shared/ReportVisualizer') {
+                    var parentEl = $(this.el).parent().parent().closest("div").attr("data-cid");
+                    var parentView = $(this.el).parent().parent().closest("div").attr("data-view");
+                }
+ 
+                // Map Full Screen Mode
+                if (this.isArgTrue(fullScreen)) {
+                    var vh = $(window).height() - 120;
+                    $("div[data-cid=" + parentEl + "]").css("height", vh);
+
+                    $(window).resize(function() {
+                        var vh = $(window).height() - 120;
+                        $("div[data-cid=" + parentEl + "]").css("height", vh);
+                    });
+                    this.map.invalidateSize();
+                } else {
+                    $("div[data-cid=" + parentEl + "]").css("height", defaultHeight);
+                    this.map.invalidateSize();
+                }
 
 				// Iterate through KML files and load overlays into layers on map 
 				if(kmlOverlay) {
@@ -622,7 +633,22 @@ define([
 			// END PROCESSING DATA
 
             console.log(this.heat);
-            console.log(this.peepcount);
+			console.log(this.peepcount);
+			
+			/*
+             * Fix for hidden divs using tokens in Splunk
+             * https://github.com/Leaflet/Leaflet/issues/2738
+             */
+            if(this.mapSize.x == 0 && this.mapSize.y == 0) {
+                var intervalId = this.intervalId = setInterval(function(that) {
+                    curSize = that.curSize = that.map.getSize();
+                    that.map.invalidateSize();
+                    if(that.curSize.x > 0 && that.curSize.y > 0) {
+                        clearInterval(that.intervalId);
+                    }
+                }, 500, this);
+			}
+			
 			// Chunk through data 50k results at a time
 			if(dataRows.length === this.chunk) {
 				this.offset += this.chunk;
